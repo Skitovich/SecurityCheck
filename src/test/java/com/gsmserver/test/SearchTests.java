@@ -2,6 +2,7 @@ package com.gsmserver.test;
 
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.gsmserver.page.HomePage;
 import com.gsmserver.page.SearchResultPage;
@@ -15,16 +16,17 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.by;
 import static com.codeborne.selenide.Selenide.*;
 
-public class SearchTests {
+public class SearchTests extends BaseTest {
 
     @BeforeEach
     void openHomePage() {
-        open("https://gsmserver.com/");
+        open("/");
+    
     }
 
     @BeforeAll
     static void setUp() {
-        Configuration.browser = "firefox";
+        Configuration.browser = "Firefox";
 //        Configuration.startMaximized = true;
     }
 
