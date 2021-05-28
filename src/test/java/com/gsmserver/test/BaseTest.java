@@ -9,11 +9,12 @@ import io.qameta.allure.selenide.AllureSelenide;
 
 public abstract class BaseTest {
     static {
-        Configuration.baseUrl = "https://gsmserver.com/";
+        Configuration.baseUrl = "http://192.168.234.62:5002/";
         Configuration.browser = WebDriverRunner.FIREFOX;
         Configuration.headless = false;
         Configuration.assertionMode = AssertionMode.STRICT;
         Configuration.fileDownload = FileDownloadMode.HTTPGET;
+        Configuration.fastSetValue = false;
         Configuration.downloadsFolder = "C:\\Users\\Ruslan\\Desktop\\Java\\SecurityCheck";
         Configuration.savePageSource = false;
         Configuration.screenshots = false;
