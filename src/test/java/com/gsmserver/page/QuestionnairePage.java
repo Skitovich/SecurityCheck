@@ -2,7 +2,11 @@ package com.gsmserver.page;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import com.github.javafaker.Faker;
 import io.qameta.allure.Step;
+
+import java.io.File;
+import java.util.Locale;
 
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -27,9 +31,24 @@ public class QuestionnairePage {
             $x("//textarea[@id='formData_residencePermitRequest']");
     private static SelenideElement travelStatus = $x("//textarea[@id='formData_travelStatus']");
     private static SelenideElement militaryStatus = $x("//textarea[@id='formData_militaryStatus']");
-    
+    private static SelenideElement timeStart = $x("//input[@id='timeStart']");
+    private static SelenideElement timeEnd = $x("//input[@id='timeEnd']");
+    private static SelenideElement positionAndOrganization = $x("//textarea[@id='positionAndOrganization']");
+    private static SelenideElement organizationContacts = $x("//textarea[@id='organizationContacts']");
+    private static SelenideElement relationDegree = $x("//textarea[@id='relationDegree']");
+    private static SelenideElement fullNameRelative = $x("//textarea[@id='fullName']");
+    private static SelenideElement yearOfBirthRelative = $x("//input[@id='yearOfBirth']");
+    private static SelenideElement candidateRegistrationAddress =
+            $x("//textarea[@id='residenceAndRegistrationAddress']");
+    private static SelenideElement candidateFinancialLiabilities =
+            $x("//textarea[@id='formData_financialLiabilities']");
+    private static SelenideElement hobbies = $x("//textarea[@id='formData_hobbies']");
+    private static SelenideElement buttonFileUpload = $x("//span[text()='Загрузка файлов']//parent::button");
+    private static SelenideElement checkbox = $x("//input[@type='checkbox']");
+    private static SelenideElement attachmentCheck = $x("//input[@type='checkbox']");
 
-    
+
+
 
     public QuestionnairePage() {
         questionnairePage.shouldBe(Condition.visible);
@@ -37,22 +56,30 @@ public class QuestionnairePage {
 
     //Метод поиска локатора для кнопки "Добавить запись" для вопросов 13, 14, 17. Параметр номер вопроса.
     @Step
-    public SelenideElement getButtonAddValue(String numberOfQuestion) {
-        return $x("//label[contains(text(),'" + numberOfQuestion + "')]/parent::div/following-sibling::div/div/div/div/button");
+    private void getButtonAddValue(String numberOfQuestion) {
+        $x("//label[contains(text(),'" + numberOfQuestion + "')]" +
+                "/parent::div/following-sibling::div/div/div/div/button").click();
     }
 
     @Step
-    public SelenideElement radioButtonRelativesInOurOrganization (boolean trueOrFalse) {
+    private void radioButtonRelativesInOurOrganization (boolean trueOrFalse) {
         if (trueOrFalse)
-        return $x("//div[@id='relativesInOurOrganization']/label/span/input");
-        else return $x("//div[@id='relativesInOurOrganization']/label/following::label/span/input");
+        $x("//div[@id='relativesInOurOrganization']/label/span/input").click();
+        else $x("//div[@id='relativesInOurOrganization']/label/following::label/span/input").click();
     }
 
     @Step
-    public SelenideElement radioButtonRelativesPermanentlyAbroad (boolean trueOrFalse) {
+    private void radioButtonRelativesPermanentlyAbroad (boolean trueOrFalse) {
         if (trueOrFalse)
-            return $x("//div[@id='relativesPermanentlyAbroad']/label/span/input");
-        else return $x("//div[@id='relativesPermanentlyAbroad']/label/following::label/span/input");
+            $x("//div[@id='relativesPermanentlyAbroad']/label/span/input").click();
+        else $x("//div[@id='relativesPermanentlyAbroad']/label/following::label/span/input").click();
     }
+
+    @Step
+    private void downloadFile () {
+        buttonFileUpload.uploadFile(new File("src/test/resources/Attachments.jpg"));
+        attachmentCheck.shouldHave(Condition.text("Attachments.pdf")).shouldHave(Condition.visible);
+    }
+
 
 }

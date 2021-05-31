@@ -40,3 +40,4 @@ out/
 *.tar.gz
 *.rar
 /.idea/
+/src/test/resources/

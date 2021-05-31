@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.*;
 
-public class SearchTests extends BaseTest {
+public class ValidationPageTest extends BaseTest {
 
     @BeforeEach
     void openHomePage() {
@@ -18,7 +18,7 @@ public class SearchTests extends BaseTest {
     @Test
     void shouldCopy() {
         new ValidationPage().
-                jumpNewTab(DataHelper.getRequiredFields());
+                jumpNewTab(DataHelper.generateFullName());
     }
 
 

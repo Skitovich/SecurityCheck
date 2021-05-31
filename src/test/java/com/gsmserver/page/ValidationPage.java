@@ -23,25 +23,24 @@ public class ValidationPage {
 
 
     @Step
-    private void openLink() {
+    private void openGenerateLink() {
         String link = linkForCandidate.getText();
         open(link);
     }
 
     @Step
-    private void request(DataHelper.RequiredFields fields) {
-        userFirstName.val(fields.getFirstName());
-        userLastName.val(fields.getLastName());
-        userPatronymic.val(fields.getPatronymic());
+    private void fillFormAndGenerateLink(DataHelper.FullName fullName) {
+        userFirstName.val(fullName.getFirstName());
+        userLastName.val(fullName.getLastName());
+        userPatronymic.val(fullName.getPatronymic());
         buttonGenerateLink.click();
         linkForCandidate.shouldBe(Condition.visible);
-        openLink();
     }
 
-
     @Step
-    public void jumpNewTab(DataHelper.RequiredFields fields) {
-        request(fields);
+    public void jumpNewTab(DataHelper.FullName fullName) {
+        fillFormAndGenerateLink(fullName);
+        openGenerateLink();
 
     }
 
