@@ -51,12 +51,13 @@ dependencies {
             "io.qameta.allure:allure-selenide:$allureVer",
             'com.github.javafaker:javafaker:1.0.2'
     )
+
     testCompileOnly(
             "org.junit.jupiter:junit-jupiter-api:$junit5Ver",
             "org.junit.jupiter:junit-jupiter-params:$junit5Ver"
     )
 
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit5Ver")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:$junit5Ver")
 }
 
 test {

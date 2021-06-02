@@ -41,7 +41,6 @@ public class ValidationPage {
     public void jumpNewTab(DataHelper.FullName fullName) {
         fillFormAndGenerateLink(fullName);
         openGenerateLink();
-
     }
 
 }

@@ -3,6 +3,7 @@ package com.gsmserver.page;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.github.javafaker.Faker;
+import com.gsmserver.data.DataHelper;
 import io.qameta.allure.Step;
 
 import java.io.File;
@@ -54,6 +55,13 @@ public class QuestionnairePage {
         questionnairePage.shouldBe(Condition.visible);
     }
 
+    @Step
+    private void fill(DataHelper.Questionnaire questionnaire) {
+     changeFullName.val(questionnaire.getChangeFullName());
+     birthData.val(questionnaire.getDateBirthAndFullLivingPlace());
+     passportData.val(questionnaire.getPassportData());
+    }
+
     //Метод поиска локатора для кнопки "Добавить запись" для вопросов 13, 14, 17. Параметр номер вопроса.
     @Step
     private void getButtonAddValue(String numberOfQuestion) {
@@ -62,17 +70,17 @@ public class QuestionnairePage {
     }
 
     @Step
-    private void radioButtonRelativesInOurOrganization (boolean trueOrFalse) {
-        if (trueOrFalse)
-        $x("//div[@id='relativesInOurOrganization']/label/span/input").click();
-        else $x("//div[@id='relativesInOurOrganization']/label/following::label/span/input").click();
+    private void radioButtonRelativesInOurOrganization (boolean radioButtonTrueOrFalse) {
+        if (radioButtonTrueOrFalse)
+        $x("//div[@id='relativesInOurOrganization']/label/span[text()='Да']").click();
+        else $x("//div[@id='relativesInOurOrganization']/label/following::label/span").click();
     }
 
-    @Step
-    private void radioButtonRelativesPermanentlyAbroad (boolean trueOrFalse) {
-        if (trueOrFalse)
-            $x("//div[@id='relativesPermanentlyAbroad']/label/span/input").click();
-        else $x("//div[@id='relativesPermanentlyAbroad']/label/following::label/span/input").click();
+    @Step//TODO Описани метода
+    private void radioButtonRelativesPermanentlyAbroad (boolean radioButtonTrueOrFalse) {
+        if (radioButtonTrueOrFalse)
+            $x("//div[@id='relativesPermanentlyAbroad']/label/span").click();
+        else $x("//div[@id='relativesPermanentlyAbroad']/label/following::label/span").click();
     }
 
     @Step
@@ -81,5 +89,15 @@ public class QuestionnairePage {
         attachmentCheck.shouldHave(Condition.text("Attachments.pdf")).shouldHave(Condition.visible);
     }
 
+
+    @Step
+    public void fillForm(DataHelper.Questionnaire questionnaire) {
+     fill(questionnaire);
+     getButtonAddValue("13");
+     radioButtonRelativesInOurOrganization(true);
+     radioButtonRelativesPermanentlyAbroad(true);
+     downloadFile();
+
+    }
 
 }
