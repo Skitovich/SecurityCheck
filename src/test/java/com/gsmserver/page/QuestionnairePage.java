@@ -2,12 +2,10 @@ package com.gsmserver.page;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import com.github.javafaker.Faker;
 import com.gsmserver.data.DataHelper;
 import io.qameta.allure.Step;
 
 import java.io.File;
-import java.util.Locale;
 
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -44,9 +42,9 @@ public class QuestionnairePage {
     private static SelenideElement candidateFinancialLiabilities =
             $x("//textarea[@id='formData_financialLiabilities']");
     private static SelenideElement hobbies = $x("//textarea[@id='formData_hobbies']");
-    private static SelenideElement buttonFileUpload = $x("//span[text()='Загрузка файлов']//parent::button");
+    private static SelenideElement buttonFileUpload = $x("//input[@type='file']");
     private static SelenideElement checkbox = $x("//input[@type='checkbox']");
-    private static SelenideElement attachmentCheck = $x("//input[@type='checkbox']");
+    private static SelenideElement attachmentCheck = $x("//span[@class='ant-upload-list-item-name']");
 
 
 
@@ -69,24 +67,20 @@ public class QuestionnairePage {
                 "/parent::div/following-sibling::div/div/div/div/button").click();
     }
 
-    @Step
-    private void radioButtonRelativesInOurOrganization (boolean radioButtonTrueOrFalse) {
-        if (radioButtonTrueOrFalse)
-        $x("//div[@id='relativesInOurOrganization']/label/span[text()='Да']").click();
-        else $x("//div[@id='relativesInOurOrganization']/label/following::label/span").click();
+    @Step("был выбран ответ {answer}")
+    private void radioButtonRelativesInOurOrganization (String answer) {
+        $x("//div[@id='relativesInOurOrganization']/label/span[text()='" + answer + "']").click();
     }
 
-    @Step//TODO Описани метода
-    private void radioButtonRelativesPermanentlyAbroad (boolean radioButtonTrueOrFalse) {
-        if (radioButtonTrueOrFalse)
-            $x("//div[@id='relativesPermanentlyAbroad']/label/span").click();
-        else $x("//div[@id='relativesPermanentlyAbroad']/label/following::label/span").click();
+    @Step("был выбран ответ {answer}")
+    private void radioButtonRelativesPermanentlyAbroad (String answer) {
+        $x("//div[@id='relativesPermanentlyAbroad']/label/span[text()='" + answer + "']").click();
     }
 
     @Step
-    private void downloadFile () {
-        buttonFileUpload.uploadFile(new File("src/test/resources/Attachments.jpg"));
-        attachmentCheck.shouldHave(Condition.text("Attachments.pdf")).shouldHave(Condition.visible);
+    private void uploadFile(String fileName) {
+        buttonFileUpload.uploadFile(new File("src/test/resources/" + fileName));
+        attachmentCheck.shouldHave(Condition.text(fileName)).shouldHave(Condition.visible);
     }
 
 
@@ -94,9 +88,9 @@ public class QuestionnairePage {
     public void fillForm(DataHelper.Questionnaire questionnaire) {
      fill(questionnaire);
      getButtonAddValue("13");
-     radioButtonRelativesInOurOrganization(true);
-     radioButtonRelativesPermanentlyAbroad(true);
-     downloadFile();
+     radioButtonRelativesInOurOrganization("Да");
+     radioButtonRelativesPermanentlyAbroad("Нет");
+     uploadFile("Attachments.pdf");
 
     }
 
