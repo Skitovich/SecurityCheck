@@ -10,13 +10,14 @@ public class DataHelper {
     private DataHelper() {
     }
 
+
     // Методы и поля для страницы валидации
     private static String generateCandidateLastName() {
-        return new Faker(new Locale("ru_RU")).name().lastName();
+        return new Faker(new Locale("ru_RU")).name().firstName();
     }
 
     private static String generateCandidateFirstName() {
-        return new Faker(new Locale("ru_RU")).name().firstName();
+        return new Faker(new Locale("ru_RU")).name().lastName();
     }
 
     public static String generateCandidatePatronymic() {
@@ -38,19 +39,18 @@ public class DataHelper {
         return new FullName(generateCandidateFirstName(), generateCandidateLastName(), generateCandidatePatronymic());
     }
   // Методы и поля для анкеты
-    @Step
-    private static String generateChangeFullName() {
+
+    public static String generateChangeFullName() {
         return new Faker(new Locale("ru_RU")).name().nameWithMiddle();
     }
-
-    @Step
-    private static String generateDateBirthAndFullLivingPlace() {
+    
+    public static String generateDateBirthData() {
         return new Faker(new Locale("ru_RU")).name().nameWithMiddle() + "" +
         new Faker(new Locale("ru_RU")).address().fullAddress();
     }
 
-    @Step
-    private static String generatePassportData() {
+
+    public static String generatePassportData() {
         Faker faker = new Faker(new Locale("ru_RU"));
         String startPassportCode = faker.code().imei().substring(0, 4);
         String endPassportCode = faker.code().imei().substring(0, 6);
@@ -59,16 +59,38 @@ public class DataHelper {
 
         return "Серия:" + startPassportCode + " №" + endPassportCode + " Выдан ОВД г." + city + " дата выдачи:" + date;
     }
-    @Value
-    public static class Questionnaire {
-        String changeFullName;
-        String dateBirthAndFullLivingPlace;
-        String passportData;
+
+    public static String generateTaxPayerNumber() {
+        return new Faker(new Locale("ru_RU")).code().imei().substring(0,11);
     }
 
-    @Step
-    public static Questionnaire generateDataCandidate() {
-        return new Questionnaire(generateChangeFullName(),generateDateBirthAndFullLivingPlace(),generateDateBirthAndFullLivingPlace());
+    public static String generateContacts() {
+        return new Faker(new Locale("ru_RU")).phoneNumber() + " " +
+                new Faker(new Locale("ru_RU")).internet().emailAddress();
+    }
+
+    public static String generateText(int howManyLetters) {
+      return new Faker(new Locale("ru_RU")).lorem().fixedString(howManyLetters);
+    }
+
+    public static String generateWords(int numOfWords) {
+        return new Faker(new Locale("ru_RU")).lorem().words(numOfWords).toString();
+    }
+
+    public static String generateAnswer() {
+        ArrayList<String> answer = new ArrayList<>(Arrays.
+                asList("Да", "Нет"));
+        Collections.shuffle(answer);
+        return answer.get(0);
+    }
+
+    public static String generateSentence (int numSentence) {
+        return new Faker(new Locale("ru_RU")).lorem().sentences(numSentence).toString();
+    }
+
+
+    public static String generateEducation() {
+        return new Faker(new Locale("ru_RU")).educator().university();
     }
 
 }

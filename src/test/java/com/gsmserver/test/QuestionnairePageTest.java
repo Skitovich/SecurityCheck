@@ -15,12 +15,12 @@ public class QuestionnairePageTest extends BaseTest {
         open("");
     }
 
-    @Test
-    void shouldClickRadioButtonTest() {
-        new ValidationPage().
-                jumpNewTab(DataHelper.generateFullName());
-        new QuestionnairePage().
-                fillForm(DataHelper.generateDataCandidate());
-    }
+//    @Test
+//    void shouldClickRadioButtonTest() {
+//        new ValidationPage().
+//                jumpNewTab(DataHelper.generateFullName());
+//        new QuestionnairePage().
+//                fillForm(DataHelper.generateDataCandidate());
+//    }
 
 }

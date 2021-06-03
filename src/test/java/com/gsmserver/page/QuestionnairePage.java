@@ -2,51 +2,47 @@ package com.gsmserver.page;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import com.gsmserver.data.DataHelper;
 import io.qameta.allure.Step;
 
 import java.io.File;
+import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.elements;
+import static com.gsmserver.data.DataHelper.*;
 
 
 public class QuestionnairePage {
-    private static SelenideElement questionnairePage = $x("//h1[text()='Анкета']");
-    private static SelenideElement userLastName = $x("//input[@id='userInfo_lastName']");
-    private static SelenideElement userFirstName = $x("//input[@id='userInfo_firstName']");
-    private static SelenideElement userPatronymic = $x("//input[@id='userInfo_patronymic']");
-    private static SelenideElement changeFullName = $x("//textarea[@id='formData_changeFullName']");
-    private static SelenideElement birthData = $x("//textarea[@id='formData_birthData']");
-    private static SelenideElement passportData = $x("//textarea[@id='formData_passport']");
-    private static SelenideElement taxpayerIdentificationNumber =
+    private static final SelenideElement questionnairePage = $x("//h1[text()='Анкета']");
+    private static final SelenideElement changeFullName = $x("//textarea[@id='formData_changeFullName']");
+    private static final SelenideElement birthData = $x("//textarea[@id='formData_birthData']");
+    private static final SelenideElement passportData = $x("//textarea[@id='formData_passport']");
+    private static final SelenideElement taxpayerIdentificationNumber =
             $x("//input[@id='formData_taxpayerIdentificationNumber']");
-    private static SelenideElement contacts = $x("//textarea[@id='formData_contacts']");
-    private static SelenideElement weaponPermission = $x("//textarea[@id='formData_weaponPermission']");
-    private static SelenideElement maritalStatus = $x("//textarea[@id='formData_maritalStatus']");
-    private static SelenideElement citizenship = $x("//textarea[@id='formData_citizenship']");
-
-    private static SelenideElement education = $x("//textarea[@id='formData_education']");
-    private static SelenideElement residencePermitRequest =
+    private static final SelenideElement contacts = $x("//textarea[@id='formData_contacts']");
+    private static final SelenideElement weaponPermission = $x("//textarea[@id='formData_weaponPermission']");
+    private static final SelenideElement maritalStatus = $x("//textarea[@id='formData_maritalStatus']");
+    private static final SelenideElement citizenship = $x("//textarea[@id='formData_citizenship']");
+    private static final SelenideElement education = $x("//textarea[@id='formData_education']");
+    private static final SelenideElement residencePermitRequest =
             $x("//textarea[@id='formData_residencePermitRequest']");
-    private static SelenideElement travelStatus = $x("//textarea[@id='formData_travelStatus']");
-    private static SelenideElement militaryStatus = $x("//textarea[@id='formData_militaryStatus']");
-    private static SelenideElement timeStart = $x("//input[@id='timeStart']");
-    private static SelenideElement timeEnd = $x("//input[@id='timeEnd']");
-    private static SelenideElement positionAndOrganization = $x("//textarea[@id='positionAndOrganization']");
-    private static SelenideElement organizationContacts = $x("//textarea[@id='organizationContacts']");
-    private static SelenideElement relationDegree = $x("//textarea[@id='relationDegree']");
-    private static SelenideElement fullNameRelative = $x("//textarea[@id='fullName']");
-    private static SelenideElement yearOfBirthRelative = $x("//input[@id='yearOfBirth']");
-    private static SelenideElement candidateRegistrationAddress =
+    private static final SelenideElement travelStatus = $x("//textarea[@id='formData_travelStatus']");
+    private static final SelenideElement militaryStatus = $x("//textarea[@id='formData_militaryStatus']");
+    private static final SelenideElement positionAndOrganization = $x("//textarea[@id='positionAndOrganization']");
+    private static final SelenideElement organizationContacts = $x("//textarea[@id='organizationContacts']");
+    private static final SelenideElement relationDegree = $x("//textarea[@id='relationDegree']");
+    private static final SelenideElement fullNameRelative = $x("//textarea[@id='fullName']");
+    private static final SelenideElement yearOfBirthRelative = $x("//input[@id='yearOfBirth']");
+    private static final SelenideElement candidateRegistrationAddress =
             $x("//textarea[@id='residenceAndRegistrationAddress']");
-    private static SelenideElement candidateFinancialLiabilities =
+    private static final SelenideElement candidateFinancialLiabilities =
             $x("//textarea[@id='formData_financialLiabilities']");
-    private static SelenideElement hobbies = $x("//textarea[@id='formData_hobbies']");
-    private static SelenideElement buttonFileUpload = $x("//input[@type='file']");
-    private static SelenideElement checkbox = $x("//input[@type='checkbox']");
-    private static SelenideElement attachmentCheck = $x("//span[@class='ant-upload-list-item-name']");
-
-
+    private static final SelenideElement hobbies = $x("//textarea[@id='formData_hobbies']");
+    private static final SelenideElement buttonFileUpload = $x("//input[@type='file']");
+    private static final SelenideElement checkbox = $x("//input[@type='checkbox']");
+    private static final SelenideElement attachmentCheck = $x("//span[@class='ant-upload-list-item-name']");
+    List<SelenideElement> start = elements("#timeStart");
+    List<SelenideElement> end = elements("#timeEnd");
 
 
     public QuestionnairePage() {
@@ -54,10 +50,19 @@ public class QuestionnairePage {
     }
 
     @Step
-    private void fill(DataHelper.Questionnaire questionnaire) {
-     changeFullName.val(questionnaire.getChangeFullName());
-     birthData.val(questionnaire.getDateBirthAndFullLivingPlace());
-     passportData.val(questionnaire.getPassportData());
+    private void fillValues() {
+        changeFullName.val(generateChangeFullName());
+        birthData.val(generateDateBirthData());
+        passportData.val(generatePassportData());
+        taxpayerIdentificationNumber.val(generateTaxPayerNumber());
+        contacts.val(generateContacts());
+        weaponPermission.val(generateAnswer());
+        maritalStatus.val(generateWords(1));
+        citizenship.val(generateWords(10));
+        education.val(generateEducation());
+        residencePermitRequest.val(generateAnswer());
+        travelStatus.val(generateSentence(5));
+        militaryStatus.val(generateWords(1));
     }
 
     //Метод поиска локатора для кнопки "Добавить запись" для вопросов 13, 14, 17. Параметр номер вопроса.
@@ -68,12 +73,12 @@ public class QuestionnairePage {
     }
 
     @Step("был выбран ответ {answer}")
-    private void radioButtonRelativesInOurOrganization (String answer) {
+    private void radioButtonRelativesInOurOrganization(String answer) {
         $x("//div[@id='relativesInOurOrganization']/label/span[text()='" + answer + "']").click();
     }
 
     @Step("был выбран ответ {answer}")
-    private void radioButtonRelativesPermanentlyAbroad (String answer) {
+    private void radioButtonRelativesPermanentlyAbroad(String answer) {
         $x("//div[@id='relativesPermanentlyAbroad']/label/span[text()='" + answer + "']").click();
     }
 
@@ -85,13 +90,24 @@ public class QuestionnairePage {
 
 
     @Step
-    public void fillForm(DataHelper.Questionnaire questionnaire) {
-     fill(questionnaire);
-     getButtonAddValue("13");
-     radioButtonRelativesInOurOrganization("Да");
-     radioButtonRelativesPermanentlyAbroad("Нет");
-     uploadFile("Attachments.pdf");
-
+    private void checkboxClick() {
+        checkbox.click();
     }
+
+    @Step
+    private void fillContacts(String contacts) {
+        QuestionnairePage.contacts.val(contacts);
+    }
+
+//    @Step
+//    public void fillForm() {
+//     fillValues();
+//     getButtonAddValue("13");
+//     radioButtonRelativesInOurOrganization("Да");
+//     radioButtonRelativesPermanentlyAbroad("Нет");
+//     uploadFile("Attachments.pdf");
+//     checkboxClick();
+//
+//    }
 
 }
