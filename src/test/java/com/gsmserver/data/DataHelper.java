@@ -38,7 +38,7 @@ public class DataHelper {
     public static FullName generateFullName() {
         return new FullName(generateCandidateFirstName(), generateCandidateLastName(), generateCandidatePatronymic());
     }
-  // Методы и поля для анкеты
+  // Методы для анкеты
 
     public static String generateChangeFullName() {
         return new Faker(new Locale("ru_RU")).name().nameWithMiddle();
@@ -55,7 +55,7 @@ public class DataHelper {
         String startPassportCode = faker.code().imei().substring(0, 4);
         String endPassportCode = faker.code().imei().substring(0, 6);
         String city = faker.address().fullAddress();
-        Date date = faker.date().birthday();
+        Date date = faker.date().birthday(20,30);
 
         return "Серия:" + startPassportCode + " №" + endPassportCode + " Выдан ОВД г." + city + " дата выдачи:" + date;
     }
@@ -69,8 +69,8 @@ public class DataHelper {
                 new Faker(new Locale("ru_RU")).internet().emailAddress();
     }
 
-    public static String generateText(int howManyLetters) {
-      return new Faker(new Locale("ru_RU")).lorem().fixedString(howManyLetters);
+    public static String generateText(int numLetters) {
+      return new Faker(new Locale("ru_RU")).lorem().fixedString(numLetters);
     }
 
     public static String generateWords(int numOfWords) {
@@ -91,6 +91,10 @@ public class DataHelper {
 
     public static String generateEducation() {
         return new Faker(new Locale("ru_RU")).educator().university();
+    }
+
+    public static String generateDate(int minAge,int maxAge) {
+        return new Faker(new Locale("ru_RU")).date().birthday(minAge,maxAge).toString().substring(4,9);
     }
 
 }

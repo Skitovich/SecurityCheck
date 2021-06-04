@@ -41,8 +41,9 @@ public class QuestionnairePage {
     private static final SelenideElement buttonFileUpload = $x("//input[@type='file']");
     private static final SelenideElement checkbox = $x("//input[@type='checkbox']");
     private static final SelenideElement attachmentCheck = $x("//span[@class='ant-upload-list-item-name']");
-    List<SelenideElement> start = elements("#timeStart");
-    List<SelenideElement> end = elements("#timeEnd");
+    private static final List<SelenideElement> start = elements("#timeStart");
+    private static final List<SelenideElement> end = elements("#timeEnd");
+    private static final SelenideElement insert = $x("//span[@aria-label='check']");
 
 
     public QuestionnairePage() {
@@ -88,26 +89,28 @@ public class QuestionnairePage {
         attachmentCheck.shouldHave(Condition.text(fileName)).shouldHave(Condition.visible);
     }
 
-
     @Step
     private void checkboxClick() {
         checkbox.click();
     }
 
     @Step
-    private void fillContacts(String contacts) {
-        QuestionnairePage.contacts.val(contacts);
+    public void fillQuestion(String numQuestion, String dateStart, String dateEnd) {
+        getButtonAddValue(numQuestion);
+        start.get(1).val(dateStart);
+        end.get(1).val(dateEnd);
+        positionAndOrganization.val(generateSentence(1));
+        organizationContacts.val(generateContacts());
+
     }
 
-//    @Step
-//    public void fillForm() {
-//     fillValues();
-//     getButtonAddValue("13");
-//     radioButtonRelativesInOurOrganization("Да");
-//     radioButtonRelativesPermanentlyAbroad("Нет");
-//     uploadFile("Attachments.pdf");
-//     checkboxClick();
-//
-//    }
-
+    @Step
+    public void fillForm() {
+     fillValues();
+     getButtonAddValue("13");
+     radioButtonRelativesInOurOrganization("Да");
+     radioButtonRelativesPermanentlyAbroad("Нет");
+     uploadFile("Attachments.pdf");
+     checkboxClick();
+    }
 }
