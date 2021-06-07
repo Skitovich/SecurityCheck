@@ -5,10 +5,8 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
 import java.io.File;
-import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.elements;
 import static com.gsmserver.data.DataHelper.*;
 
 
@@ -47,7 +45,8 @@ public class QuestionnairePage {
     private static final SelenideElement edit = $x("//*[@data-icon='edit']");
     private static final SelenideElement submit = $x("//button[@type='submit']");
     private static final SelenideElement financialLiabilities = $x("//textarea[@id='formData_financialLiabilities']");
-
+    private static final SelenideElement registrationAddress = $x("//textarea[@id='residenceAndRegistrationAddress']");
+    private static final SelenideElement successful = $x("//div[text()='Данные успешно отправлены']");
 
 
     public QuestionnairePage() {
@@ -66,8 +65,8 @@ public class QuestionnairePage {
         citizenship.val(generateWords(10));
         education.val(generateEducation());
         residencePermitRequest.val(generateAnswer());
-        travelStatus.val(generateSentence(5));
-        militaryStatus.val(generateWords(1));
+        travelStatus.val(getRandomWord(20,"абвгдеёжзиклмнОпрсТуфх"));
+        militaryStatus.val(generateText(50));
         financialLiabilities.val(generateAnswer());
     }
 
@@ -100,20 +99,20 @@ public class QuestionnairePage {
     }
 
     @Step
-    public void fillStart () {
+    public void fillStart() {
         start.click();
         start.val("05.2020").pressEnter();
     }
 
     @Step
-    public void fillEnd () {
+    public void fillEnd() {
         end.click();
         end.val("09.2020").pressEnter();
     }
 
 
     @Step
-    public void fillQuestion(String numQuestion) {
+    public void fillQuestion13(String numQuestion) {
         getButtonAddValue(numQuestion);
         fillStart();
         fillEnd();
@@ -123,10 +122,21 @@ public class QuestionnairePage {
         edit.shouldBe(Condition.visible);
     }
 
+    @Step
+    public void fillQuestion17(String numQuestion) {
+        getButtonAddValue(numQuestion);
+        fillStart();
+        fillEnd();
+        registrationAddress.val(generateContacts());
+        insert.click();
+        edit.shouldBe(Condition.visible);
+    }
+
 
     @Step
     public void submitClick() {
         submit.click();
+        successful.shouldBe(Condition.visible);
     }
 
 

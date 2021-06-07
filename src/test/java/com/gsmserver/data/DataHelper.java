@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import io.qameta.allure.Step;
 import lombok.Value;
 
+import java.security.SecureRandom;
 import java.util.*;
 
 public class DataHelper {
@@ -39,40 +40,53 @@ public class DataHelper {
     }
   // Методы для анкеты
 
+    public static String getRandomWord(int length, String alphabet) {
+        SecureRandom rnd = new SecureRandom();
+        StringBuilder sb = new StringBuilder(Math.max(length, 16));
+        for (int i = 0; i < length; i++) {
+            int len = alphabet.length();
+            int random = rnd.nextInt(len);
+            char c = alphabet.charAt(random);
+            sb.append(c);
+        }
+
+        return sb.toString();
+    }
+
     public static String generateChangeFullName() {
-        return new Faker(new Locale("ru_RU")).name().nameWithMiddle();
+        return new Faker(new Locale("ru")).name().nameWithMiddle();
     }
     
     public static String generateDateBirthData() {
-        return new Faker(new Locale("ru_RU")).name().nameWithMiddle() + "" +
-        new Faker(new Locale("ru_RU")).address().fullAddress();
+        return new Faker(new Locale("ru")).name().nameWithMiddle() + " " +
+        new Faker(new Locale("ru")).address().city();
     }
 
 
     public static String generatePassportData() {
-        Faker faker = new Faker(new Locale("ru_RU"));
+        Faker faker = new Faker(new Locale("ru"));
         String startPassportCode = faker.code().imei().substring(0, 4);
-        String endPassportCode = faker.code().imei().substring(0, 6);
-        String city = faker.address().fullAddress();
+        String endPassportCode = faker.random().nextInt(1,1000000).toString();
+        String city = faker.address().cityName();
         Date date = faker.date().birthday(20,30);
-        return "Серия:" + startPassportCode + " №" + endPassportCode + " Выдан ОВД г." + city + " дата выдачи:" + date;
+        return "Серия: " + startPassportCode + " №" + endPassportCode + " Выдан ОВД г."+ city +" дата выдачи:"+ date;
     }
 
     public static String generateTaxPayerNumber() {
-        return new Faker(new Locale("ru_RU")).code().imei().substring(0,11);
+        return new Faker(new Locale("ru")).code().imei().substring(0,11);
     }
 
     public static String generateContacts() {
-        return new Faker(new Locale("ru_RU")).phoneNumber() + " " +
-                new Faker(new Locale("ru_RU")).internet().emailAddress();
+        return new Faker(new Locale("ru")).phoneNumber() + " " +
+                new Faker(new Locale("ru")).internet().emailAddress();
     }
 
     public static String generateText(int numLetters) {
-      return new Faker(new Locale("ru_RU")).lorem().fixedString(numLetters);
+      return new Faker(new Locale("ru")).lorem().fixedString(numLetters);
     }
 
     public static String generateWords(int numOfWords) {
-        return new Faker(new Locale("ru_RU")).lorem().words(numOfWords).toString();
+        return new Faker(new Locale("ru")).lorem().words(numOfWords).toString();
     }
 
     public static String generateAnswer() {
@@ -83,16 +97,16 @@ public class DataHelper {
     }
 
     public static String generateSentence (int numSentence) {
-        return new Faker(new Locale("ru_RU")).lorem().sentences(numSentence).toString();
+        return new Faker(new Locale("ru")).lorem().sentences(numSentence).toString();
     }
 
 
     public static String generateEducation() {
-        return new Faker(new Locale("ru_RU")).educator().university();
+        return new Faker(new Locale("ru")).educator().university();
     }
 
     public static String generateDate(int minAge,int maxAge) {
-        return new Faker(new Locale("ru_RU")).date().birthday(minAge,maxAge).toString().substring(4,9);
+        return new Faker(new Locale("ru")).date().birthday(minAge,maxAge).toString().substring(4,9);
     }
 
 }

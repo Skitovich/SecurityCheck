@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.sleep;
+
 
 public class QuestionnairePageTest extends BaseTest {
 
@@ -23,13 +23,13 @@ public class QuestionnairePageTest extends BaseTest {
         new ValidationPage().jumpNewTab(DataHelper.generateFullName());
         QuestionnairePage questionnairePage = new QuestionnairePage();
         questionnairePage.fillValues();
-        questionnairePage.fillQuestion("13");
+        questionnairePage.fillQuestion13("13");
+        questionnairePage.fillQuestion17("17");
         questionnairePage.radioButtonRelativesInOurOrganization("Да");
         questionnairePage.radioButtonRelativesPermanentlyAbroad("Нет");
-        questionnairePage.uploadFile("Attachments.pdf");
+        questionnairePage.uploadFile("Attachments.jpg");
         questionnairePage.checkboxClick();
         questionnairePage.submitClick();
-        sleep(10000);
     }
 
 }
