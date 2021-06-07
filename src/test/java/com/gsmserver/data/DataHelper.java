@@ -10,7 +10,6 @@ public class DataHelper {
     private DataHelper() {
     }
 
-
     // Методы и поля для страницы валидации
     private static String generateCandidateLastName() {
         return new Faker(new Locale("ru_RU")).name().firstName();
@@ -56,7 +55,6 @@ public class DataHelper {
         String endPassportCode = faker.code().imei().substring(0, 6);
         String city = faker.address().fullAddress();
         Date date = faker.date().birthday(20,30);
-
         return "Серия:" + startPassportCode + " №" + endPassportCode + " Выдан ОВД г." + city + " дата выдачи:" + date;
     }
 

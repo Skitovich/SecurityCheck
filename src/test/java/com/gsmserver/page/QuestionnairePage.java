@@ -41,9 +41,13 @@ public class QuestionnairePage {
     private static final SelenideElement buttonFileUpload = $x("//input[@type='file']");
     private static final SelenideElement checkbox = $x("//input[@type='checkbox']");
     private static final SelenideElement attachmentCheck = $x("//span[@class='ant-upload-list-item-name']");
-    private static final List<SelenideElement> start = elements("#timeStart");
-    private static final List<SelenideElement> end = elements("#timeEnd");
+    private static final SelenideElement start = $x("//input[@id='timeStart']");
+    private static final SelenideElement end = $x("//input[@id='timeEnd']");
     private static final SelenideElement insert = $x("//span[@aria-label='check']");
+    private static final SelenideElement edit = $x("//*[@data-icon='edit']");
+    private static final SelenideElement submit = $x("//button[@type='submit']");
+    private static final SelenideElement financialLiabilities = $x("//textarea[@id='formData_financialLiabilities']");
+
 
 
     public QuestionnairePage() {
@@ -51,7 +55,7 @@ public class QuestionnairePage {
     }
 
     @Step
-    private void fillValues() {
+    public void fillValues() {
         changeFullName.val(generateChangeFullName());
         birthData.val(generateDateBirthData());
         passportData.val(generatePassportData());
@@ -64,53 +68,66 @@ public class QuestionnairePage {
         residencePermitRequest.val(generateAnswer());
         travelStatus.val(generateSentence(5));
         militaryStatus.val(generateWords(1));
+        financialLiabilities.val(generateAnswer());
     }
 
     //Метод поиска локатора для кнопки "Добавить запись" для вопросов 13, 14, 17. Параметр номер вопроса.
     @Step
-    private void getButtonAddValue(String numberOfQuestion) {
+    public void getButtonAddValue(String numberOfQuestion) {
         $x("//label[contains(text(),'" + numberOfQuestion + "')]" +
                 "/parent::div/following-sibling::div/div/div/div/button").click();
     }
 
     @Step("был выбран ответ {answer}")
-    private void radioButtonRelativesInOurOrganization(String answer) {
+    public void radioButtonRelativesInOurOrganization(String answer) {
         $x("//div[@id='relativesInOurOrganization']/label/span[text()='" + answer + "']").click();
     }
 
     @Step("был выбран ответ {answer}")
-    private void radioButtonRelativesPermanentlyAbroad(String answer) {
+    public void radioButtonRelativesPermanentlyAbroad(String answer) {
         $x("//div[@id='relativesPermanentlyAbroad']/label/span[text()='" + answer + "']").click();
     }
 
     @Step
-    private void uploadFile(String fileName) {
+    public void uploadFile(String fileName) {
         buttonFileUpload.uploadFile(new File("src/test/resources/" + fileName));
         attachmentCheck.shouldHave(Condition.text(fileName)).shouldHave(Condition.visible);
     }
 
     @Step
-    private void checkboxClick() {
+    public void checkboxClick() {
         checkbox.click();
     }
 
     @Step
-    public void fillQuestion(String numQuestion, String dateStart, String dateEnd) {
-        getButtonAddValue(numQuestion);
-        start.get(1).val(dateStart);
-        end.get(1).val(dateEnd);
-        positionAndOrganization.val(generateSentence(1));
-        organizationContacts.val(generateContacts());
-
+    public void fillStart () {
+        start.click();
+        start.val("05.2020").pressEnter();
     }
 
     @Step
-    public void fillForm() {
-     fillValues();
-     getButtonAddValue("13");
-     radioButtonRelativesInOurOrganization("Да");
-     radioButtonRelativesPermanentlyAbroad("Нет");
-     uploadFile("Attachments.pdf");
-     checkboxClick();
+    public void fillEnd () {
+        end.click();
+        end.val("09.2020").pressEnter();
     }
+
+
+    @Step
+    public void fillQuestion(String numQuestion) {
+        getButtonAddValue(numQuestion);
+        fillStart();
+        fillEnd();
+        positionAndOrganization.val(generateSentence(1));
+        organizationContacts.val(generateContacts());
+        insert.click();
+        edit.shouldBe(Condition.visible);
+    }
+
+
+    @Step
+    public void submitClick() {
+        submit.click();
+    }
+
+
 }

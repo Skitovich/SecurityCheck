@@ -7,20 +7,29 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public class QuestionnairePageTest extends BaseTest {
+
 
     @BeforeEach
     void openHomePage() {
         open("");
     }
 
-//    @Test
-//    void shouldClickRadioButtonTest() {
-//        new ValidationPage().
-//                jumpNewTab(DataHelper.generateFullName());
-//        new QuestionnairePage().
-//                fillForm(DataHelper.generateDataCandidate());
-//    }
+
+    @Test
+    void shouldClickRadioButtonTest() {
+        new ValidationPage().jumpNewTab(DataHelper.generateFullName());
+        QuestionnairePage questionnairePage = new QuestionnairePage();
+        questionnairePage.fillValues();
+        questionnairePage.fillQuestion("13");
+        questionnairePage.radioButtonRelativesInOurOrganization("Да");
+        questionnairePage.radioButtonRelativesPermanentlyAbroad("Нет");
+        questionnairePage.uploadFile("Attachments.pdf");
+        questionnairePage.checkboxClick();
+        questionnairePage.submitClick();
+        sleep(10000);
+    }
 
 }
