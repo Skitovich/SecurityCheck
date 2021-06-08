@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.sleep;
 
 
 public class QuestionnairePageTest extends BaseTest {
@@ -22,7 +21,7 @@ public class QuestionnairePageTest extends BaseTest {
 
     @Test
     void shouldClickRadioButtonTest() {
-        new ValidationPage().jumpNewTab(DataHelper.generateFullName());
+        new ValidationPage().openLink(DataHelper.generateFullName());
         QuestionnairePage questionnairePage = new QuestionnairePage();
         MailPage mailPage = new MailPage();
         questionnairePage.fillValues();
@@ -30,12 +29,29 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.fillQuestion17("17");
         questionnairePage.radioButtonRelativesInOurOrganization("Да");
         questionnairePage.radioButtonRelativesPermanentlyAbroad("Нет");
-        questionnairePage.uploadFile("Attachments.pdf");
+        questionnairePage.uploadFile("Attachments.jpg");
         questionnairePage.checkboxClick();
         questionnairePage.submitClick();
-        questionnairePage.goToYandexMail();
-        mailPage.refresh();
+        mailPage.goToYandexMail();
+        mailPage.loginYandexMail();
         mailPage.generateTitle(DataHelper.generateFullName());
     }
+
+
+
+//    @Test
+//    void shouldFillFirstCardSuccessfully() {
+//        val loginPage = new LoginPageV1();
+//        val authInfo = DataHelper.getAuthInfo();
+//        val verificationPage = loginPage.validLogin(authInfo);
+//        val verificationCode = DataHelper.getVerificationCodeFor(authInfo);
+//        val dashboardPage = verificationPage.validVerify(verificationCode);
+//        val cardsPage = dashboardPage.depositMoneyToCard(1);
+//        cardsPage.fillFirstCard(2000);
+//        dashboardPage.cardBalanceCheck();
+//    }
+
+
+
 
 }

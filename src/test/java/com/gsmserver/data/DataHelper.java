@@ -8,8 +8,10 @@ import java.security.SecureRandom;
 import java.util.*;
 
 public class DataHelper {
-    private DataHelper() {
+
+    public DataHelper() {
     }
+
 
     // Методы и поля для страницы валидации
     private static String generateCandidateLastName() {
@@ -29,8 +31,8 @@ public class DataHelper {
 
     @Value
     public static class FullName {
-        String firstName;
-        String lastName;
+        String firstname;
+        String lastname;
         String patronymic;
     }
 
@@ -38,6 +40,7 @@ public class DataHelper {
     public static FullName generateFullName() {
         return new FullName(generateCandidateFirstName(), generateCandidateLastName(), generateCandidatePatronymic());
     }
+
   // Методы для анкеты
 
     public static String getRandomWord(int length, String alphabet) {
@@ -56,7 +59,7 @@ public class DataHelper {
     public static String generateChangeFullName() {
         return new Faker(new Locale("ru")).name().nameWithMiddle();
     }
-    
+
     public static String generateDateBirthData() {
         return new Faker(new Locale("ru")).name().nameWithMiddle() + " " +
         new Faker(new Locale("ru")).address().city();

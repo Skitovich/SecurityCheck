@@ -5,14 +5,13 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.FileDownloadMode;
 import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import com.gsmserver.page.QuestionnairePage;
 import io.qameta.allure.selenide.AllureSelenide;
 
 public abstract class BaseTest {
 
     static {
-        Configuration.baseUrl = "localhost:5002/";
-        Configuration.browser = WebDriverRunner.FIREFOX;
+        Configuration.baseUrl = "http://localhost:5002/";
+        Configuration.browser = WebDriverRunner.CHROME;
         Configuration.headless = false;
         Configuration.assertionMode = AssertionMode.STRICT;
         Configuration.fileDownload = FileDownloadMode.HTTPGET;

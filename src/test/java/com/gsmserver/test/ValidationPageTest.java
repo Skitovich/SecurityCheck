@@ -18,7 +18,7 @@ public class ValidationPageTest extends BaseTest {
     @Test
     void shouldCopy() {
         new ValidationPage().
-                jumpNewTab(DataHelper.generateFullName());
+                openLink(DataHelper.generateFullName());
     }
 
 

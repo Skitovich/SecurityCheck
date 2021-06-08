@@ -6,7 +6,7 @@ import io.qameta.allure.Step;
 
 import java.io.File;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$x;
 import static com.gsmserver.data.DataHelper.*;
 
 
@@ -53,6 +53,7 @@ public class QuestionnairePage {
         questionnairePage.shouldBe(Condition.visible);
     }
 
+
     @Step
     public void fillValues() {
         changeFullName.val(generateChangeFullName());
@@ -65,7 +66,7 @@ public class QuestionnairePage {
         citizenship.val(generateWords(10));
         education.val(generateEducation());
         residencePermitRequest.val(generateAnswer());
-        travelStatus.val(getRandomWord(20,"абвгдеёжзиклмнОпрсТуфх"));
+        travelStatus.val(getRandomWord(20, "абвгдеёжзиклмнОпрсТуфх"));
         militaryStatus.val(generateText(50));
         financialLiabilities.val(generateAnswer());
     }
@@ -136,12 +137,7 @@ public class QuestionnairePage {
     @Step
     public void submitClick() {
         submit.click();
-        successful.waitUntil(Condition.visible,7000);
-    }
-
-    @Step
-    public void goToYandexMail() {
-        open("https://mail.yandex.ru/?from=header-360&uid=1130000048345014#inbox");
+        successful.waitUntil(Condition.visible, 10000);
     }
 
 
