@@ -7,6 +7,7 @@ import io.qameta.allure.Step;
 import java.io.File;
 
 import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.sleep;
 import static com.gsmserver.data.DataHelper.*;
 
 
@@ -136,7 +137,7 @@ public class QuestionnairePage {
     @Step
     public void submitClick() {
         submit.click();
-        successful.shouldBe(Condition.visible);
+        successful.waitUntil(Condition.visible,7000);
     }
 
 
