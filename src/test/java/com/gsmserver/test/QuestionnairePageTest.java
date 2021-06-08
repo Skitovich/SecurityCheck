@@ -1,6 +1,7 @@
 package com.gsmserver.test;
 
 import com.gsmserver.data.DataHelper;
+import com.gsmserver.page.MailPage;
 import com.gsmserver.page.QuestionnairePage;
 import com.gsmserver.page.ValidationPage;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,6 +24,7 @@ public class QuestionnairePageTest extends BaseTest {
     void shouldClickRadioButtonTest() {
         new ValidationPage().jumpNewTab(DataHelper.generateFullName());
         QuestionnairePage questionnairePage = new QuestionnairePage();
+        MailPage mailPage = new MailPage();
         questionnairePage.fillValues();
         questionnairePage.fillQuestion13("13");
         questionnairePage.fillQuestion17("17");
@@ -31,7 +33,9 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.uploadFile("Attachments.pdf");
         questionnairePage.checkboxClick();
         questionnairePage.submitClick();
-
+        questionnairePage.goToYandexMail();
+        mailPage.refresh();
+        mailPage.generateTitle(DataHelper.generateFullName());
     }
 
 }

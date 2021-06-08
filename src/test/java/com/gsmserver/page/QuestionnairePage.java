@@ -6,8 +6,7 @@ import io.qameta.allure.Step;
 
 import java.io.File;
 
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 import static com.gsmserver.data.DataHelper.*;
 
 
@@ -102,13 +101,13 @@ public class QuestionnairePage {
     @Step
     public void fillStart() {
         start.click();
-        start.val("05.2020").pressEnter();
+        start.val("05.2020").pressEnter(); //TODO сделать форматер для даты
     }
 
     @Step
     public void fillEnd() {
         end.click();
-        end.val("09.2020").pressEnter();
+        end.val("09.2020").pressEnter(); //TODO сделать форматер для даты
     }
 
 
@@ -138,6 +137,11 @@ public class QuestionnairePage {
     public void submitClick() {
         submit.click();
         successful.waitUntil(Condition.visible,7000);
+    }
+
+    @Step
+    public void goToYandexMail() {
+        open("https://mail.yandex.ru/?from=header-360&uid=1130000048345014#inbox");
     }
 
 
