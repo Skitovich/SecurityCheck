@@ -15,11 +15,7 @@ public class ValidationPageTest extends BaseTest {
         open("");
     }
 
-    @Test
-    void shouldCopy() {
-        new ValidationPage().
-                openLink(DataHelper.generateFullName());
-    }
+
 
 
 }

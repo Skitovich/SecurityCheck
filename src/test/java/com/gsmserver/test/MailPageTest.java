@@ -11,8 +11,7 @@ public class MailPageTest {
         MailPage mailPage = new MailPage();
         mailPage.goToYandexMail();
         mailPage.loginYandexMail();
-        mailPage.generateTitle(DataHelper.generateFullName());
-
+        mailPage.generateTitle();
     }
 }
 

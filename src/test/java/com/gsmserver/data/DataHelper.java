@@ -12,14 +12,18 @@ public class DataHelper {
     public DataHelper() {
     }
 
+    public static FullName getFullNameInfo() {
+        return new FullName();
+    }
+
 
     // Методы и поля для страницы валидации
     private static String generateCandidateLastName() {
-        return new Faker(new Locale("ru_RU")).name().firstName();
+        return new Faker(new Locale("ru_RU")).name().lastName();
     }
 
     private static String generateCandidateFirstName() {
-        return new Faker(new Locale("ru_RU")).name().lastName();
+        return new Faker(new Locale("ru_RU")).name().firstName();
     }
 
     public static String generateCandidatePatronymic() {
@@ -29,17 +33,35 @@ public class DataHelper {
         return patronymic.get(1);
     }
 
-    @Value
+
     public static class FullName {
-        String firstname;
-        String lastname;
-        String patronymic;
+       private static String firstname;
+       private static String lastname;
+       private static String patronymic;
+
+    public void generateFullName() {
+        firstname = generateCandidateFirstName();
+        lastname = generateCandidateLastName();
+        patronymic = generateCandidatePatronymic();
+    }
+    public static String getLastname() {
+        return lastname;
     }
 
-    @Step
-    public static FullName generateFullName() {
-        return new FullName(generateCandidateFirstName(), generateCandidateLastName(), generateCandidatePatronymic());
+    public static String getPatronymic() {
+            return patronymic;
     }
+
+    public static String getFirstname() {
+            return firstname;
+    }
+
+    }
+
+//    @Step
+//    public static FullName generateFullName() {
+//        return new FullName(generateCandidateFirstName(), generateCandidateLastName(), generateCandidatePatronymic());
+//    }
 
   // Методы для анкеты
 

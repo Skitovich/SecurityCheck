@@ -7,7 +7,7 @@ import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
-import static com.gsmserver.data.DataHelper.generateFullName;
+
 
 public class ValidationPage {
     private static SelenideElement userLastName = $x("//input[@id='userInfo_lastName']");
@@ -31,7 +31,7 @@ public class ValidationPage {
 
     @Step
     private void fillFormAndGenerateLink(DataHelper.FullName fullName) {
-        generateFullName();
+        fullName.generateFullName();
         userFirstName.val(fullName.getFirstname());
         userLastName.val(fullName.getLastname());
         userPatronymic.val(fullName.getPatronymic());

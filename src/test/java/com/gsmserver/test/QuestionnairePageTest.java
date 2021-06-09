@@ -21,7 +21,7 @@ public class QuestionnairePageTest extends BaseTest {
 
     @Test
     void shouldClickRadioButtonTest() {
-        new ValidationPage().openLink(DataHelper.generateFullName());
+        new ValidationPage().openLink(DataHelper.getFullNameInfo());
         QuestionnairePage questionnairePage = new QuestionnairePage();
         MailPage mailPage = new MailPage();
         questionnairePage.fillValues();
@@ -29,18 +29,23 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.fillQuestion17("17");
         questionnairePage.radioButtonRelativesInOurOrganization("Да");
         questionnairePage.radioButtonRelativesPermanentlyAbroad("Нет");
-        questionnairePage.uploadFile("Attachments.jpg");
+        questionnairePage.uploadFile("Attachments.pdf");
         questionnairePage.checkboxClick();
         questionnairePage.submitClick();
         mailPage.goToYandexMail();
         mailPage.loginYandexMail();
-        mailPage.generateTitle(DataHelper.generateFullName());
+        mailPage.refresh();
+        mailPage.generateTitle();
     }
 
 
 
 //    @Test
 //    void shouldFillFirstCardSuccessfully() {
+//        val validationPage = new ValidationPage();
+//        val getAuthInfo = DataHelper.generateFullName();
+
+//    }
 //        val loginPage = new LoginPageV1();
 //        val authInfo = DataHelper.getAuthInfo();
 //        val verificationPage = loginPage.validLogin(authInfo);

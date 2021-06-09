@@ -29,9 +29,9 @@ public class MailPage {
     }
 
     @Step
-    public void generateTitle(DataHelper.FullName fullName) {
-        $x("//span[contains(text(),'" + fullName.getLastname() + " " + fullName.getPatronymic() + "']").
-                shouldBe(Condition.visible).click();
+    public void generateTitle() {
+        $x("//span[contains(text(),'" + DataHelper.FullName.getPatronymic() + " " + DataHelper.FullName.getLastname() + "')]").
+                waitUntil(Condition.visible,25000).click();
     }
 
     @Step
