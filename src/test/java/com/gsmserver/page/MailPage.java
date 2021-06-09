@@ -24,14 +24,14 @@ public class MailPage {
     }
 
     @Step
-    public void refresh() {
+    public void refreshInbox() {
         refresh.waitUntil(Condition.visible, 7000).click();
     }
 
     @Step
-    public void generateTitle() {
+    public void openMailByTitle() {
         $x("//span[contains(text(),'" + DataHelper.FullName.getPatronymic() + " " + DataHelper.FullName.getLastname() + "')]").
-                waitUntil(Condition.visible,25000).click();
+                waitUntil(Condition.visible,15000).click();
     }
 
     @Step

@@ -16,7 +16,6 @@ public class DataHelper {
         return new FullName();
     }
 
-
     // Методы и поля для страницы валидации
     private static String generateCandidateLastName() {
         return new Faker(new Locale("ru_RU")).name().lastName();
@@ -33,7 +32,6 @@ public class DataHelper {
         return patronymic.get(1);
     }
 
-
     public static class FullName {
        private static String firstname;
        private static String lastname;
@@ -44,17 +42,18 @@ public class DataHelper {
         lastname = generateCandidateLastName();
         patronymic = generateCandidatePatronymic();
     }
-    public static String getLastname() {
-        return lastname;
-    }
 
-    public static String getPatronymic() {
+        public static String getLastname() {
+            return lastname;
+        }
+
+        public static String getPatronymic() {
             return patronymic;
-    }
+        }
 
-    public static String getFirstname() {
+        public static String getFirstname() {
             return firstname;
-    }
+        }
 
     }
 

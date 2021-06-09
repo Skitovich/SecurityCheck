@@ -4,6 +4,7 @@ import com.gsmserver.data.DataHelper;
 import com.gsmserver.page.MailPage;
 import com.gsmserver.page.QuestionnairePage;
 import com.gsmserver.page.ValidationPage;
+import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +25,7 @@ public class QuestionnairePageTest extends BaseTest {
         new ValidationPage().openLink(DataHelper.getFullNameInfo());
         QuestionnairePage questionnairePage = new QuestionnairePage();
         MailPage mailPage = new MailPage();
-        questionnairePage.fillValues();
+        questionnairePage.fillGeneratedValues();
         questionnairePage.fillQuestion13("13");
         questionnairePage.fillQuestion17("17");
         questionnairePage.radioButtonRelativesInOurOrganization("Да");
@@ -34,29 +35,31 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.submitClick();
         mailPage.goToYandexMail();
         mailPage.loginYandexMail();
-        mailPage.refresh();
-        mailPage.generateTitle();
+        mailPage.refreshInbox();
+        mailPage.openMailByTitle();
     }
 
 
+    @Test
+    void shouldEnterToMail() {
+        val validationPage = new ValidationPage();
+        val getAuthInfo = DataHelper.getFullNameInfo();
+        val questionnairePage = new QuestionnairePage();
+        val mailPage = new MailPage();
+        validationPage.openLink(getAuthInfo);
+        questionnairePage.fillGeneratedValues();
+        questionnairePage.fillQuestion13("13");
+        questionnairePage.fillQuestion17("17");
+        questionnairePage.radioButtonRelativesInOurOrganization("Да");
+        questionnairePage.radioButtonRelativesPermanentlyAbroad("Нет");
+        questionnairePage.uploadFile("Attachments.pdf");
+        questionnairePage.checkboxClick();
+        questionnairePage.submitClick();
+        mailPage.goToYandexMail();
+        mailPage.loginYandexMail();
+        mailPage.refreshInbox();
+        mailPage.openMailByTitle();
 
-//    @Test
-//    void shouldFillFirstCardSuccessfully() {
-//        val validationPage = new ValidationPage();
-//        val getAuthInfo = DataHelper.generateFullName();
 
-//    }
-//        val loginPage = new LoginPageV1();
-//        val authInfo = DataHelper.getAuthInfo();
-//        val verificationPage = loginPage.validLogin(authInfo);
-//        val verificationCode = DataHelper.getVerificationCodeFor(authInfo);
-//        val dashboardPage = verificationPage.validVerify(verificationCode);
-//        val cardsPage = dashboardPage.depositMoneyToCard(1);
-//        cardsPage.fillFirstCard(2000);
-//        dashboardPage.cardBalanceCheck();
-//    }
-
-
-
-
+    }
 }

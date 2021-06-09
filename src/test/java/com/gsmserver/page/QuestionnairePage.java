@@ -55,7 +55,7 @@ public class QuestionnairePage {
 
 
     @Step
-    public void fillValues() {
+    public void fillGeneratedValues() {
         changeFullName.val(generateChangeFullName());
         birthData.val(generateDateBirthData());
         passportData.val(generatePassportData());
