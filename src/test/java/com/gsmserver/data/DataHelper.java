@@ -2,7 +2,6 @@ package com.gsmserver.data;
 
 import com.github.javafaker.Faker;
 import io.qameta.allure.Step;
-import lombok.Value;
 
 import java.security.SecureRandom;
 import java.util.*;
@@ -56,11 +55,6 @@ public class DataHelper {
         }
 
     }
-
-//    @Step
-//    public static FullName generateFullName() {
-//        return new FullName(generateCandidateFirstName(), generateCandidateLastName(), generateCandidatePatronymic());
-//    }
 
   // Методы для анкеты
 

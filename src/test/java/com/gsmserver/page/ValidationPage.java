@@ -10,13 +10,13 @@ import static com.codeborne.selenide.Selenide.open;
 
 
 public class ValidationPage {
-    private static SelenideElement userLastName = $x("//input[@id='userInfo_lastName']");
-    private static SelenideElement userFirstName = $x("//input[@id='userInfo_firstName']");
-    private static SelenideElement userPatronymic = $x("//input[@id='userInfo_patronymic']");
-    private static SelenideElement buttonGenerateLink = $x("//button[contains(@class,'generateBtn')]");
-    private static SelenideElement buttonCopyToClipboard = $x("//button[contains(@class,'copyBtn')]");
-    private static SelenideElement buttonClearForm = $x("//button[contains(@class,'clearBtn')]");
-    private static SelenideElement linkForCandidate = $x("//div[contains(text(),'http')]");
+    private static final SelenideElement userLastName = $x("//input[@id='userInfo_lastName']");
+    private static final SelenideElement userFirstName = $x("//input[@id='userInfo_firstName']");
+    private static final SelenideElement userPatronymic = $x("//input[@id='userInfo_patronymic']");
+    private static final SelenideElement buttonGenerateLink = $x("//button[contains(@class,'generateBtn')]");
+    private static final SelenideElement buttonCopyToClipboard = $x("//button[contains(@class,'copyBtn')]");
+    private static final SelenideElement buttonClearForm = $x("//button[contains(@class,'clearBtn')]");
+    private static final SelenideElement linkForCandidate = $x("//div[contains(text(),'http')]");
 
 
     public ValidationPage() {
@@ -32,9 +32,9 @@ public class ValidationPage {
     @Step
     private void fillFormAndGenerateLink(DataHelper.FullName fullName) {
         fullName.generateFullName();
-        userFirstName.val(fullName.getFirstname());
-        userLastName.val(fullName.getLastname());
-        userPatronymic.val(fullName.getPatronymic());
+        userFirstName.val(DataHelper.FullName.getFirstname());
+        userLastName.val(DataHelper.FullName.getLastname());
+        userPatronymic.val(DataHelper.FullName.getPatronymic());
         buttonGenerateLink.click();
         linkForCandidate.shouldBe(Condition.visible);
     }

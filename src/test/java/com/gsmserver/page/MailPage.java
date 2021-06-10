@@ -30,8 +30,9 @@ public class MailPage {
 
     @Step
     public void openMailByTitle() {
-        $x("//span[contains(text(),'" + DataHelper.FullName.getPatronymic() + " " + DataHelper.FullName.getLastname() + "')]").
-                waitUntil(Condition.visible,15000).click();
+        $x("//span[contains(text()," +
+                "'" + DataHelper.FullName.getPatronymic() + " " + DataHelper.FullName.getLastname() + "')]").
+                waitUntil(Condition.visible,30000).click();
     }
 
     @Step
@@ -42,5 +43,13 @@ public class MailPage {
         password.val("qwerty137");
         enter.click();
         refresh.waitUntil(Condition.visible, 8000);
+    }
+
+    @Step
+    public void checkAttachments() {
+        $x("//div[contains(text()," +
+                "'"+DataHelper.FullName.getPatronymic()+" "+DataHelper.FullName.getLastname()+"')]")
+                .shouldBe(Condition.visible);
+
     }
 }

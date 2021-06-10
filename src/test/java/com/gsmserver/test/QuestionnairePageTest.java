@@ -44,9 +44,9 @@ public class QuestionnairePageTest extends BaseTest {
     void shouldEnterToMail() {
         val validationPage = new ValidationPage();
         val getAuthInfo = DataHelper.getFullNameInfo();
+        validationPage.openLink(getAuthInfo);
         val questionnairePage = new QuestionnairePage();
         val mailPage = new MailPage();
-        validationPage.openLink(getAuthInfo);
         questionnairePage.fillGeneratedValues();
         questionnairePage.fillQuestion13("13");
         questionnairePage.fillQuestion17("17");
@@ -59,7 +59,5 @@ public class QuestionnairePageTest extends BaseTest {
         mailPage.loginYandexMail();
         mailPage.refreshInbox();
         mailPage.openMailByTitle();
-
-
     }
 }
