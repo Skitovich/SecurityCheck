@@ -26,8 +26,8 @@ public class QuestionnairePageTest extends BaseTest {
         QuestionnairePage questionnairePage = new QuestionnairePage();
         MailPage mailPage = new MailPage();
         questionnairePage.fillGeneratedValues();
-        questionnairePage.fillQuestion13("13");
-        questionnairePage.fillQuestion17("17");
+        questionnairePage.fillQuestionNum13(3,"MM.yyyy");
+        questionnairePage.fillQuestion17(3,"MM.yyyy");
         questionnairePage.radioButtonRelativesInOurOrganization("Да");
         questionnairePage.radioButtonRelativesPermanentlyAbroad("Нет");
         questionnairePage.uploadFile("Attachments.pdf");
@@ -48,8 +48,8 @@ public class QuestionnairePageTest extends BaseTest {
         val questionnairePage = new QuestionnairePage();
         val mailPage = new MailPage();
         questionnairePage.fillGeneratedValues();
-        questionnairePage.fillQuestion13("13");
-        questionnairePage.fillQuestion17("17");
+        questionnairePage.fillQuestionNum13(3,"mm.yyyy");
+        questionnairePage.fillQuestion17(3,"mm.yyyy");
         questionnairePage.radioButtonRelativesInOurOrganization("Да");
         questionnairePage.radioButtonRelativesPermanentlyAbroad("Нет");
         questionnairePage.uploadFile("Attachments.pdf");

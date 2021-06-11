@@ -4,6 +4,8 @@ import com.github.javafaker.Faker;
 import io.qameta.allure.Step;
 
 import java.security.SecureRandom;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class DataHelper {
@@ -53,7 +55,6 @@ public class DataHelper {
         public static String getFirstname() {
             return firstname;
         }
-
     }
 
   // Методы для анкеты
@@ -103,10 +104,6 @@ public class DataHelper {
       return new Faker(new Locale("ru")).lorem().fixedString(numLetters);
     }
 
-    public static String generateWords(int numOfWords) {
-        return new Faker(new Locale("ru")).lorem().words(numOfWords).toString();
-    }
-
     public static String generateAnswer() {
         ArrayList<String> answer = new ArrayList<>(Arrays.
                 asList("Да", "Нет"));
@@ -114,17 +111,14 @@ public class DataHelper {
         return answer.get(0);
     }
 
-    public static String generateSentence (int numSentence) {
-        return new Faker(new Locale("ru")).lorem().sentences(numSentence).toString();
-    }
-
-
     public static String generateEducation() {
         return new Faker(new Locale("ru")).educator().university();
     }
 
-    public static String generateDate(int minAge,int maxAge) {
-        return new Faker(new Locale("ru")).date().birthday(minAge,maxAge).toString().substring(4,9);
+    public static String generateDate (int minusYearsFromNow,String dateFormat){
+        LocalDate dayDeliveryCard = LocalDate.now().minusYears(minusYearsFromNow);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
+        return dayDeliveryCard.format(formatter);
     }
 
 }

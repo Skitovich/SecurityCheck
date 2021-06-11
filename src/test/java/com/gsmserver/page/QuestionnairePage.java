@@ -2,6 +2,7 @@ package com.gsmserver.page;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import com.gsmserver.data.DataHelper;
 import io.qameta.allure.Step;
 
 import java.io.File;
@@ -47,7 +48,7 @@ public class QuestionnairePage {
     private static final SelenideElement financialLiabilities = $x("//textarea[@id='formData_financialLiabilities']");
     private static final SelenideElement registrationAddress = $x("//textarea[@id='residenceAndRegistrationAddress']");
     private static final SelenideElement successful = $x("//div[text()='Данные успешно отправлены']");
-
+    public String alphabet = "АаБбВвГгДдЕеЁёЖжЗзИиКкЛлМмНнОоПпРрСсТтУуФфЦцЮюЯяЭэ  ";
 
     public QuestionnairePage() {
         questionnairePage.shouldBe(Condition.visible);
@@ -62,11 +63,11 @@ public class QuestionnairePage {
         taxpayerIdentificationNumber.val(generateTaxPayerNumber());
         contacts.val(generateContacts());
         weaponPermission.val(generateAnswer());
-        maritalStatus.val(generateWords(1));
-        citizenship.val(generateWords(10));
+        maritalStatus.val(getRandomWord(20, alphabet));
+        citizenship.val(getRandomWord(30, alphabet));
         education.val(generateEducation());
         residencePermitRequest.val(generateAnswer());
-        travelStatus.val(getRandomWord(20, "абвгдеёжзиклмнОпрсТуфх"));
+        travelStatus.val(getRandomWord(20, alphabet));
         militaryStatus.val(generateText(50));
         financialLiabilities.val(generateAnswer());
     }
@@ -100,34 +101,34 @@ public class QuestionnairePage {
     }
 
     @Step
-    public void fillStart() {
+    public void fillDateStart(int minusYearsFromNow, String dateFormat) {
         start.click();
-        start.val("05.2020").pressEnter(); //TODO сделать форматер для даты
+        start.val(generateDate(minusYearsFromNow, dateFormat)).pressEnter(); //TODO сделать форматер для даты
     }
 
     @Step
-    public void fillEnd() {
+    public void fillEnd(int minusYearsFromNow, String dateFormat) {
         end.click();
-        end.val("09.2020").pressEnter(); //TODO сделать форматер для даты
+        end.val(generateDate(minusYearsFromNow, dateFormat)).pressEnter(); //TODO сделать форматер для даты
     }
 
 
-    @Step
-    public void fillQuestion13(String numQuestion) {
-        getButtonAddValue(numQuestion);
-        fillStart();
-        fillEnd();
-        positionAndOrganization.val(generateSentence(1));
+    @Step("Заполнение 13 вопроса")
+    public void fillQuestionNum13(int minusYearsFromNow, String dateFormat) {
+        getButtonAddValue("13");
+        fillDateStart(minusYearsFromNow, dateFormat);
+        fillEnd(minusYearsFromNow - 1, dateFormat);
+        positionAndOrganization.val(getRandomWord(15, alphabet));
         organizationContacts.val(generateContacts());
         insert.click();
         edit.shouldBe(Condition.visible);
     }
 
     @Step
-    public void fillQuestion17(String numQuestion) {
-        getButtonAddValue(numQuestion);
-        fillStart();
-        fillEnd();
+    public void fillQuestion17(int minusYearsFromNow, String dateFormat) {
+        getButtonAddValue("17");
+        fillDateStart(minusYearsFromNow, dateFormat);
+        fillEnd(minusYearsFromNow - 1, dateFormat);
         registrationAddress.val(generateContacts());
         insert.click();
         edit.shouldBe(Condition.visible);
