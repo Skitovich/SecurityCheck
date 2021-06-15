@@ -52,7 +52,6 @@ public class MailPage {
                 "'"+DataHelper.FullName.getPatronymic()+" "+DataHelper.FullName.getLastname()+"')]")
                 .shouldBe(Condition.visible);
         $x("//span[contains(@title,"+fileName+")]").shouldBe(Condition.visible);
-        sleep(10000);
         attachPdf.shouldHave(Condition.exist);
         attachDocx.shouldHave(Condition.exist);
     }

@@ -60,7 +60,7 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.checkboxClick();
         questionnairePage.submitClick();
         mailPage.goToYandexMail();
-        mailPage.loginYandexMail();
+//        mailPage.loginYandexMail();
         mailPage.refreshInbox();
         mailPage.openMailByTitle();
         mailPage.checkAttachments(fileName);
