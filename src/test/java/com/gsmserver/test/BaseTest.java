@@ -11,7 +11,7 @@ public abstract class BaseTest {
 
     static {
         Configuration.baseUrl = "http://localhost:5002/";
-        Configuration.browser = WebDriverRunner.CHROME;
+        Configuration.browser = WebDriverRunner.FIREFOX;
         Configuration.headless = false;
         Configuration.assertionMode = AssertionMode.STRICT;
         Configuration.fileDownload = FileDownloadMode.HTTPGET;

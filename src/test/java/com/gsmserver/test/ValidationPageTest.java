@@ -1,12 +1,9 @@
 package com.gsmserver.test;
 
 
-import com.gsmserver.data.DataHelper;
-import com.gsmserver.page.ValidationPage;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.open;
 
 public class ValidationPageTest extends BaseTest {
 
@@ -14,8 +11,6 @@ public class ValidationPageTest extends BaseTest {
     void openHomePage() {
         open("");
     }
-
-
 
 
 }

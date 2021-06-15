@@ -48,7 +48,8 @@ public class QuestionnairePage {
     private static final SelenideElement financialLiabilities = $x("//textarea[@id='formData_financialLiabilities']");
     private static final SelenideElement registrationAddress = $x("//textarea[@id='residenceAndRegistrationAddress']");
     private static final SelenideElement successful = $x("//div[text()='Данные успешно отправлены']");
-    public String alphabet = "АаБбВвГгДдЕеЁёЖжЗзИиКкЛлМмНнОоПпРрСсТтУуФфЦцЮюЯяЭэ  ";
+    public String alphabet = "АаБбВвГгДдЕеЁёЖжЗзИиКкЛлМмНн ОоПпРрСсТУуФфЦцЮюЯяЭэХх    ";
+
 
     public QuestionnairePage() {
         questionnairePage.shouldBe(Condition.visible);
@@ -79,14 +80,14 @@ public class QuestionnairePage {
                 "/parent::div/following-sibling::div/div/div/div/button").click();
     }
 
-    @Step("был выбран ответ {answer}")
-    public void radioButtonRelativesInOurOrganization(String answer) {
-        $x("//div[@id='relativesInOurOrganization']/label/span[text()='" + answer + "']").click();
+    @Step("был выбран ответ {DataHelper.generateAnswer()}")
+    public void radioButtonRelativesInOurOrganization() {
+        $x("//div[@id='relativesInOurOrganization']/label/span[text()='" + DataHelper.generateAnswer() + "']").click();
     }
 
-    @Step("был выбран ответ {answer}")
-    public void radioButtonRelativesPermanentlyAbroad(String answer) {
-        $x("//div[@id='relativesPermanentlyAbroad']/label/span[text()='" + answer + "']").click();
+    @Step("был выбран ответ {DataHelper.generateAnswer()}")
+    public void radioButtonRelativesPermanentlyAbroad() {
+        $x("//div[@id='relativesPermanentlyAbroad']/label/span[text()='" + DataHelper.generateAnswer() + "']").click();
     }
 
     @Step
@@ -101,15 +102,15 @@ public class QuestionnairePage {
     }
 
     @Step
-    public void fillDateStart(int minusYearsFromNow, String dateFormat) {
+    private void fillDateStart(int minusYearsFromNow, String dateFormat) {
         start.click();
-        start.val(generateDate(minusYearsFromNow, dateFormat)).pressEnter(); //TODO сделать форматер для даты
+        start.val(generateDate(minusYearsFromNow, dateFormat)).pressEnter();
     }
 
     @Step
-    public void fillEnd(int minusYearsFromNow, String dateFormat) {
+    private void fillEnd(int minusYearsFromNow, String dateFormat) {
         end.click();
-        end.val(generateDate(minusYearsFromNow, dateFormat)).pressEnter(); //TODO сделать форматер для даты
+        end.val(generateDate(minusYearsFromNow, dateFormat)).pressEnter();
     }
 
 
@@ -124,7 +125,18 @@ public class QuestionnairePage {
         edit.shouldBe(Condition.visible);
     }
 
-    @Step
+    @Step("Заполнение 14 вопроса")
+    public void fillQuestionNum14(int minusYearsFromNow, String dateFormat) {
+        getButtonAddValue("14");
+        yearOfBirthRelative.click();
+        yearOfBirthRelative.val(generateDate(minusYearsFromNow,dateFormat));
+        relationDegree.val(generateText(10));
+        fullNameRelative.val(generateChangeFullName());
+        insert.click();
+        edit.shouldBe(Condition.visible);
+    }
+
+    @Step("Заполнение 17 вопроса")
     public void fillQuestion17(int minusYearsFromNow, String dateFormat) {
         getButtonAddValue("17");
         fillDateStart(minusYearsFromNow, dateFormat);
@@ -140,6 +152,5 @@ public class QuestionnairePage {
         submit.click();
         successful.waitUntil(Condition.visible, 10000);
     }
-
 
 }
