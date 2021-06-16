@@ -19,7 +19,8 @@ public class QuestionnairePage {
     private static final SelenideElement taxpayerIdentificationNumber =
             $x("//input[@id='formData_taxpayerIdentificationNumber']");
     private static final SelenideElement contacts = $x("//textarea[@id='formData_contacts']");
-    private static final SelenideElement weaponPermission = $x("//textarea[@id='formData_weaponPermission']");
+    private static final SelenideElement weaponPermission =
+            $x("//textarea[@id='formData_weaponPermission']");
     private static final SelenideElement maritalStatus = $x("//textarea[@id='formData_maritalStatus']");
     private static final SelenideElement citizenship = $x("//textarea[@id='formData_citizenship']");
     private static final SelenideElement education = $x("//textarea[@id='formData_education']");
@@ -27,8 +28,10 @@ public class QuestionnairePage {
             $x("//textarea[@id='formData_residencePermitRequest']");
     private static final SelenideElement travelStatus = $x("//textarea[@id='formData_travelStatus']");
     private static final SelenideElement militaryStatus = $x("//textarea[@id='formData_militaryStatus']");
-    private static final SelenideElement positionAndOrganization = $x("//textarea[@id='positionAndOrganization']");
-    private static final SelenideElement organizationContacts = $x("//textarea[@id='organizationContacts']");
+    private static final SelenideElement positionAndOrganization =
+            $x("//textarea[@id='positionAndOrganization']");
+    private static final SelenideElement organizationContacts =
+            $x("//textarea[@id='organizationContacts']");
     private static final SelenideElement relationDegree = $x("//textarea[@id='relationDegree']");
     private static final SelenideElement fullNameRelative = $x("//textarea[@id='fullName']");
     private static final SelenideElement yearOfBirthRelative = $x("//input[@id='yearOfBirth']");
@@ -45,8 +48,10 @@ public class QuestionnairePage {
     private static final SelenideElement insert = $x("//span[@aria-label='check']");
     private static final SelenideElement edit = $x("//*[@data-icon='edit']");
     private static final SelenideElement submit = $x("//button[@type='submit']");
-    private static final SelenideElement financialLiabilities = $x("//textarea[@id='formData_financialLiabilities']");
-    private static final SelenideElement registrationAddress = $x("//textarea[@id='residenceAndRegistrationAddress']");
+    private static final SelenideElement financialLiabilities =
+            $x("//textarea[@id='formData_financialLiabilities']");
+    private static final SelenideElement registrationAddress =
+            $x("//textarea[@id='residenceAndRegistrationAddress']");
     private static final SelenideElement successful = $x("//div[text()='Данные успешно отправлены']");
     public String alphabet = "АаБбВвГгДдЕеЁёЖжЗзИиКкЛлМмНн ОоПпРрСсТУуФфЦцЮюЯяЭэХх    ";
 
@@ -75,19 +80,21 @@ public class QuestionnairePage {
 
     //Метод поиска локатора для кнопки "Добавить запись" для вопросов 13, 14, 17. Параметр номер вопроса.
     @Step
-    public void getButtonAddValue(String numberOfQuestion) {
+    private void getButtonAddValue(String numberOfQuestion) {
         $x("//label[contains(text(),'" + numberOfQuestion + "')]" +
                 "/parent::div/following-sibling::div/div/div/div/button").click();
     }
 
-    @Step("был выбран ответ {DataHelper.generateAnswer()}")
+    @Step("был выбран ответ {}")
     public void radioButtonRelativesInOurOrganization() {
-        $x("//div[@id='relativesInOurOrganization']/label/span[text()='" + DataHelper.generateAnswer() + "']").click();
+        $x("//div[@id='relativesInOurOrganization']/" +
+                "label/span[text()='" + DataHelper.generateAnswer() + "']").click();
     }
 
-    @Step("был выбран ответ {DataHelper.generateAnswer()}")
+    @Step("был выбран ответ {}")
     public void radioButtonRelativesPermanentlyAbroad() {
-        $x("//div[@id='relativesPermanentlyAbroad']/label/span[text()='" + DataHelper.generateAnswer() + "']").click();
+        $x("//div[@id='relativesPermanentlyAbroad']/" +
+                "label/span[text()='" + DataHelper.generateAnswer() + "']").click();
     }
 
     @Step
@@ -129,7 +136,7 @@ public class QuestionnairePage {
     public void fillQuestionNum14(int minusYearsFromNow, String dateFormat) {
         getButtonAddValue("14");
         yearOfBirthRelative.click();
-        yearOfBirthRelative.val(generateDate(minusYearsFromNow,dateFormat));
+        yearOfBirthRelative.val(generateDate(minusYearsFromNow, dateFormat));
         relationDegree.val(generateText(10));
         fullNameRelative.val(generateChangeFullName());
         insert.click();
@@ -145,7 +152,6 @@ public class QuestionnairePage {
         insert.click();
         edit.shouldBe(Condition.visible);
     }
-
 
     @Step
     public void submitClick() {

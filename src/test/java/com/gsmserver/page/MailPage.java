@@ -25,35 +25,46 @@ public class MailPage {
     }
 
     @Step
-    public void refreshInbox() {
-        refresh.waitUntil(Condition.visible, 7000).click();
+    private void refreshInbox() {
+        sleep(15000);
+        refresh.shouldBe(Condition.visible).click();
     }
 
     @Step
-    public void openMailByTitle() {
+    private void openMailByTitle() {
         $x("//span[contains(text()," +
                 "'" + DataHelper.FullName.getPatronymic() + " " + DataHelper.FullName.getLastname() + "')]").
-                waitUntil(Condition.visible,30000).click();
+                waitUntil(Condition.visible, 10000).click();
     }
 
     @Step
-    public void loginYandexMail() {
+    private void loginYandexMail() {
         enterMail.click();
         login.val("TestNspkAnketa");
         enter.click();
         password.val("qwerty137");
         enter.click();
-        refresh.waitUntil(Condition.visible, 8000);
+        refresh.shouldBe(Condition.visible);
     }
 
     @Step
-    public void checkAttachments(String fileName) {
+    private void checkAttachments(String fileName) {
         $x("//div[contains(text()," +
-                "'"+DataHelper.FullName.getPatronymic()+" "+DataHelper.FullName.getLastname()+"')]")
+                "'" + DataHelper.FullName.getPatronymic() + " " + DataHelper.FullName.getLastname() + "')]")
                 .shouldBe(Condition.visible);
-        $x("//span[contains(@title,"+fileName+")]").shouldBe(Condition.visible);
+        $x("//span[contains(@title," + fileName + ")]").shouldBe(Condition.visible);
         attachPdf.shouldHave(Condition.exist);
         attachDocx.shouldHave(Condition.exist);
+    }
+
+    @Step
+    public void checkLoginMailAndCheckAttach(String filename) {
+        if (enterMail.is(Condition.visible)) {
+            loginYandexMail();
+        }
+        refreshInbox();
+        openMailByTitle();
+        checkAttachments(filename);
     }
 
 }
