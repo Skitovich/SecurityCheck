@@ -34,7 +34,7 @@ public class MailPage {
     private void openMailByTitle() {
         $x("//span[contains(text()," +
                 "'" + DataHelper.FullName.getPatronymic() + " " + DataHelper.FullName.getLastname() + "')]").
-                waitUntil(Condition.visible, 10000).click();
+                waitUntil(Condition.visible, 20000).click();
     }
 
     @Step

@@ -35,14 +35,9 @@ public class QuestionnairePage {
     private static final SelenideElement relationDegree = $x("//textarea[@id='relationDegree']");
     private static final SelenideElement fullNameRelative = $x("//textarea[@id='fullName']");
     private static final SelenideElement yearOfBirthRelative = $x("//input[@id='yearOfBirth']");
-    private static final SelenideElement candidateRegistrationAddress =
-            $x("//textarea[@id='residenceAndRegistrationAddress']");
-    private static final SelenideElement candidateFinancialLiabilities =
-            $x("//textarea[@id='formData_financialLiabilities']");
     private static final SelenideElement hobbies = $x("//textarea[@id='formData_hobbies']");
     private static final SelenideElement buttonFileUpload = $x("//input[@type='file']");
     private static final SelenideElement checkbox = $x("//input[@type='checkbox']");
-    private static final SelenideElement attachmentCheck = $x("//span[@class='ant-upload-list-item-name']");
     //Табличные вопросы 13,14,17
     private static final SelenideElement start = $x("//input[@id='timeStart']");
     private static final SelenideElement end = $x("//input[@id='timeEnd']");
@@ -53,15 +48,14 @@ public class QuestionnairePage {
     private static final SelenideElement deleteConfirmQuestionOK = $x("//span[text()='OK']");
     private static final SelenideElement deleteConfirmQuestion =
             $x("//div[text()='Вы уверены, что хотите удалить запись?']");
-
-    
     private static final SelenideElement financialLiabilities =
             $x("//textarea[@id='formData_financialLiabilities']");
     private static final SelenideElement registrationAddress =
             $x("//textarea[@id='residenceAndRegistrationAddress']");
     private static final SelenideElement successful = $x("//div[text()='Данные успешно отправлены']");
-    private String alphabet = "АаБбВвГгДдЕеЁёЖжЗзИиКкЛлМмНн ОоПпРрСсТУуФфЦцЮюЯяЭэХх    ";
-    private int howManyLetters = 2000;
+    private static final SelenideElement declinedLinkIsDeath =
+            $x("//span[text()='Данная ссылка некорректна или неактуальна']");
+    private final String alphabet = "АаБбВвГгДдЕеЁёЖжЗзИиКкЛлМмНн ОоПпРрСсТУуФфЦцЮюЯяЭэХх    ";
 
 
     public QuestionnairePage() {
@@ -82,27 +76,28 @@ public class QuestionnairePage {
         education.val(generateEducation());
         residencePermitRequest.val(generateAnswer());
         travelStatus.val(DataHelper.generateText(20, alphabet));
-        militaryStatus.val(generateText(30,alphabet));
+        militaryStatus.val(generateText(30, alphabet));
         financialLiabilities.val(generateAnswer());
-        hobbies.val(DataHelper.generateText(20,alphabet));
+        hobbies.val(DataHelper.generateText(20, alphabet));
     }
 
     @Step
     public void fillGeneratedValues2000char() {
-        changeFullName.val(generateText(howManyLetters,alphabet));
-        birthData.val(generateText(howManyLetters,alphabet));
-        passportData.val(generateText(howManyLetters,alphabet));
-        taxpayerIdentificationNumber.val(generateText(howManyLetters,"0123456789"));
-        contacts.val(generateText(howManyLetters,alphabet));
-        weaponPermission.val(generateText(howManyLetters,alphabet));
-        maritalStatus.val(generateText(howManyLetters,alphabet));
-        citizenship.val(generateText(howManyLetters,alphabet));
-        education.val(generateText(howManyLetters,alphabet));
-        residencePermitRequest.val(generateText(howManyLetters,alphabet));
-        travelStatus.val(generateText(howManyLetters,alphabet));
-        militaryStatus.val(generateText(howManyLetters,alphabet));
-        financialLiabilities.val(generateText(howManyLetters,alphabet));
-        hobbies.val(generateText(howManyLetters,alphabet));
+        int howManyLetters = 2000;
+        changeFullName.val(generateText(howManyLetters, alphabet));
+        birthData.val(generateText(howManyLetters, alphabet));
+        passportData.val(generateText(howManyLetters, alphabet));
+        taxpayerIdentificationNumber.val(generateText(howManyLetters, "0123456789"));
+        contacts.val(generateText(howManyLetters, alphabet));
+        weaponPermission.val(generateText(howManyLetters, alphabet));
+        maritalStatus.val(generateText(howManyLetters, alphabet));
+        citizenship.val(generateText(howManyLetters, alphabet));
+        education.val(generateText(howManyLetters, alphabet));
+        residencePermitRequest.val(generateText(howManyLetters, alphabet));
+        travelStatus.val(generateText(howManyLetters, alphabet));
+        militaryStatus.val(generateText(howManyLetters, alphabet));
+        financialLiabilities.val(generateText(howManyLetters, alphabet));
+        hobbies.val(generateText(howManyLetters, alphabet));
     }
 
     //Метод поиска локатора для кнопки "Добавить запись" для вопросов 13, 14, 17. Параметр номер вопроса.
@@ -125,9 +120,33 @@ public class QuestionnairePage {
     }
 
     @Step
-    public void uploadFile(String fileName) {
-        buttonFileUpload.uploadFile(new File("src/test/resources/" + fileName));
-        attachmentCheck.shouldHave(Condition.text(fileName)).shouldHave(Condition.visible);
+    public void uploadFile(String extension) {
+        buttonFileUpload.uploadFile(new File("src/test/resources/Attachments." + extension));
+        checkAttachmentExtension(extension);
+    }
+
+    @Step
+    public void checkAttachmentExtension (String extension) {
+        $x("//span[contains(text(),'" + extension + "')]").shouldBe(Condition.visible);
+
+    }
+
+    @Step
+    public void uploadAllExtensions (String attachPdf,
+                                    String attachJpg,
+                                    String attachDocx,
+                                    String attachPng,
+                                    String attachXlsx) {
+        buttonFileUpload.uploadFile(new File("src/test/resources/Attachments." + attachPdf));
+        buttonFileUpload.uploadFile(new File("src/test/resources/Attachments." + attachDocx));
+        buttonFileUpload.uploadFile(new File("src/test/resources/Attachments." + attachJpg));
+        buttonFileUpload.uploadFile(new File("src/test/resources/Attachments." + attachPng));
+        buttonFileUpload.uploadFile(new File("src/test/resources/Attachments." + attachXlsx));
+       checkAttachmentExtension(attachPdf);
+       checkAttachmentExtension(attachXlsx);
+       checkAttachmentExtension(attachJpg);
+       checkAttachmentExtension(attachPng);
+       checkAttachmentExtension(attachXlsx);
     }
 
     @Step
@@ -149,22 +168,22 @@ public class QuestionnairePage {
 
 
     @Step("Заполнение 13 вопроса")
-    public void fillQuestionNum13(int minusYearsFromNow, String dateFormat) {
+    public void fillQuestion13(int minusYearsFromNow, String dateFormat) {
         getButtonAddValue("13");
         fillDateStart(minusYearsFromNow, dateFormat);
         fillEnd(minusYearsFromNow - 1, dateFormat);
         positionAndOrganization.val(generateText(15, alphabet));
-        organizationContacts.val(generateText(30,alphabet));
+        organizationContacts.val(generateText(30, alphabet));
         insert.click();
         edit.shouldBe(Condition.visible);
     }
 
     @Step("Заполнение 14 вопроса")
-    public void fillQuestionNum14(int minusYearsFromNow, String dateFormat) {
+    public void fillQuestion14(int minusYearsFromNow, String dateFormat) {
         getButtonAddValue("14");
         yearOfBirthRelative.click();
         yearOfBirthRelative.val(generateDate(minusYearsFromNow, dateFormat));
-        relationDegree.val(generateText(10,alphabet));
+        relationDegree.val(generateText(10, alphabet));
         fullNameRelative.val(generateChangeFullName());
         insert.click();
         edit.shouldBe(Condition.visible);
@@ -180,6 +199,41 @@ public class QuestionnairePage {
         edit.shouldBe(Condition.visible);
     }
 
+    @Step("Заполнение 17 вопроса, редактирование, сохранение")
+    public void fill17QuestionAndEdit(int minusYearsFromNow, String dateFormat) {
+        fillQuestion17(minusYearsFromNow, dateFormat);
+        edit.click();
+        fillDateStart(minusYearsFromNow, dateFormat);
+        fillEnd(minusYearsFromNow - 1, dateFormat);
+        registrationAddress.val(generateContacts());
+        insert.click();
+        edit.shouldBe(Condition.visible);
+    }
+
+    @Step("Заполнение 14 вопроса, редактирование, сохранение")
+    public void fill14QuestionAndEdit(int minusYearsFromNow, String dateFormat) {
+        fillQuestion14(minusYearsFromNow, dateFormat);
+        edit.click();
+        yearOfBirthRelative.click();
+        yearOfBirthRelative.val(generateDate(minusYearsFromNow, dateFormat));
+        relationDegree.val(generateText(10, alphabet));
+        fullNameRelative.val(generateChangeFullName());
+        insert.click();
+        edit.shouldBe(Condition.visible);
+    }
+
+    @Step("Заполнение 13 вопроса, редактирование, сохранение")
+    public void fill13QuestionAndEdit(int minusYearsFromNow, String dateFormat) {
+        fillQuestion13(minusYearsFromNow, dateFormat);
+        edit.click();
+        fillDateStart(minusYearsFromNow, dateFormat);
+        fillEnd(minusYearsFromNow - 1, dateFormat);
+        positionAndOrganization.val(generateText(15, alphabet));
+        organizationContacts.val(generateText(30, alphabet));
+        insert.click();
+        edit.shouldBe(Condition.visible);
+    }
+
     @Step
     public void submitClick() {
         submit.click();
@@ -191,6 +245,12 @@ public class QuestionnairePage {
         delete.click();
         deleteConfirmQuestion.shouldBe(Condition.visible);
         deleteConfirmQuestionOK.click();
+    }
+
+    @Step
+    public void submitClickByDeadLink() {
+        submit.click();
+        declinedLinkIsDeath.shouldBe(Condition.visible);
     }
 
 
