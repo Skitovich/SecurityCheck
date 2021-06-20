@@ -8,7 +8,6 @@ import io.qameta.allure.Step;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
 import static com.gsmserver.data.DataHelper.generateText;
-import static com.gsmserver.data.DataHelper.getRandomWord;
 
 
 public class ValidationPage {
@@ -20,6 +19,8 @@ public class ValidationPage {
     private static final SelenideElement buttonClearForm = $x("//button[contains(@class,'clearBtn')]");
     private static final SelenideElement linkForCandidate = $x("//div[contains(text(),'http')]");
     private static final SelenideElement popupCopyClipBoard = $x("//span[text()='Ссылка скопирована']");
+    private static final SelenideElement openExpiredLink = $x("//div[text()='Данная ссылка некорректна или неактуальна']");
+    private String alphabet = "АаБбВвГгДдЕеЁёЖжЗзИиКкЛлМмНнОоПпРрСсТУуФфЦцЮюЯяЭэХх-";
 
 
     public ValidationPage() {
@@ -56,11 +57,21 @@ public class ValidationPage {
 
     @Step
     public void fillForm2000chars() {
-        userFirstName.val(getRandomWord(2001,"абв"));
-        userLastName.val(getRandomWord(2001,"абв"));
-        userPatronymic.val(getRandomWord(2001,"абв"));
+        userFirstName.val(DataHelper.generateText(2000,alphabet));
+        userLastName.val(DataHelper.generateText(2000,alphabet));
+        userPatronymic.val(DataHelper.generateText(2000,alphabet));
         buttonGenerateLink.click();
         linkForCandidate.shouldBe(Condition.visible);
     }
+
+    @Step
+    public void openExpiredLink() {
+        openGenerateLink();
+        openExpiredLink.shouldBe(Condition.visible);
+    }
+
+
+
+
 
 }

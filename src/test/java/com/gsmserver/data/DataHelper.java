@@ -59,7 +59,7 @@ public class DataHelper {
 
   // Методы для анкеты
 
-    public static String getRandomWord(int length, String alphabet) {
+    public static String generateText(int length, String alphabet) {
         SecureRandom rnd = new SecureRandom();
         StringBuilder sb = new StringBuilder(Math.max(length, 16));
         for (int i = 0; i < length; i++) {
@@ -96,13 +96,9 @@ public class DataHelper {
     }
 
     public static String generateContacts() {
-        return new Faker(new Locale("ru")).phoneNumber() + " " +
-                new Faker(new Locale("ru")).internet().emailAddress();
+        return new Faker(new Locale("ru")).internet().emailAddress();
     }
 
-    public static String generateText(int numLetters) {
-      return new Faker(new Locale("ru")).lorem().fixedString(numLetters);
-    }
 
     public static String generateAnswer() {
         ArrayList<String> answer = new ArrayList<>(Arrays.
