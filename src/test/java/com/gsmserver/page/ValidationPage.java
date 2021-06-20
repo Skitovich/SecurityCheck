@@ -7,7 +7,6 @@ import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
-import static com.gsmserver.data.DataHelper.generateText;
 
 
 public class ValidationPage {
@@ -27,13 +26,13 @@ public class ValidationPage {
     }
 
 
-    @Step
+    @Step("Открывает сгенерированную ссылку")
     public void openGenerateLink() {
         String link = linkForCandidate.getText();
         open(link);
     }
 
-    @Step
+    @Step("Заполняет поле сгеренрированными данными и генерирует ссылку")
     public void fillFormAndGenerateLink(DataHelper.FullName fullName) {
         fullName.generateFullName();
         userFirstName.val(DataHelper.FullName.getFirstname());
@@ -43,35 +42,32 @@ public class ValidationPage {
         linkForCandidate.shouldBe(Condition.visible);
     }
 
-    @Step
+    @Step("Заполняет поля, генерирует ссылку и открывает сгенерированную ссылку")
     public void openLink(DataHelper.FullName fullName) {
         fillFormAndGenerateLink(fullName);
         openGenerateLink();
     }
 
-    @Step
+    @Step("Копирует сгенерированную ссылку в буфер обмена и проверяет наличие всплывающего окна")
     public void copyClipBoard() {
         buttonCopyToClipboard.click();
         popupCopyClipBoard.shouldBe(Condition.visible);
     }
 
-    @Step
+    @Step("Заполняет поле 2000 символов")
     public void fillForm2000chars() {
-        userFirstName.val(DataHelper.generateText(2000,alphabet));
-        userLastName.val(DataHelper.generateText(2000,alphabet));
-        userPatronymic.val(DataHelper.generateText(2000,alphabet));
+        userFirstName.val(DataHelper.generateText(2000, alphabet));
+        userLastName.val(DataHelper.generateText(2000, alphabet));
+        userPatronymic.val(DataHelper.generateText(2000, alphabet));
         buttonGenerateLink.click();
         linkForCandidate.shouldBe(Condition.visible);
     }
 
-    @Step
+    @Step("Открывает ссылку, ждет ошибку о истечении времени ссылки")
     public void openExpiredLink() {
         openGenerateLink();
         openExpiredLink.shouldBe(Condition.visible);
     }
-
-
-
 
 
 }

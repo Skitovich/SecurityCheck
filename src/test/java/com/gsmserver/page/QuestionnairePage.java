@@ -63,7 +63,7 @@ public class QuestionnairePage {
     }
 
 
-    @Step
+    @Step("Генерация значений для всех текстовых полей")
     public void fillGeneratedValues() {
         changeFullName.val(generateChangeFullName());
         birthData.val(generateDateBirthData());
@@ -81,7 +81,7 @@ public class QuestionnairePage {
         hobbies.val(DataHelper.generateText(20, alphabet));
     }
 
-    @Step
+    @Step("Генерация 2000 символов во все текстовые поля")
     public void fillGeneratedValues2000char() {
         int howManyLetters = 2000;
         changeFullName.val(generateText(howManyLetters, alphabet));
@@ -100,14 +100,14 @@ public class QuestionnairePage {
         hobbies.val(generateText(howManyLetters, alphabet));
     }
 
-    //Метод поиска локатора для кнопки "Добавить запись" для вопросов 13, 14, 17. Параметр номер вопроса.
-    @Step
+
+    @Step("метод принимает на вход номер вопроса 13,14,17 и нажимает на кнопку Добавить запись")
     private void getButtonAddValue(String numberOfQuestion) {
         $x("//label[contains(text(),'" + numberOfQuestion + "')]" +
                 "/parent::div/following-sibling::div/div/div/div/button").click();
     }
 
-    @Step("был выбран ответ {}")
+    @Step("Радиокнопка, ответ: Да или Нет генерируется")
     public void radioButtonRelativesInOurOrganization() {
         $x("//div[@id='relativesInOurOrganization']/" +
                 "label/span[text()='" + DataHelper.generateAnswer() + "']").click();
@@ -119,20 +119,20 @@ public class QuestionnairePage {
                 "label/span[text()='" + DataHelper.generateAnswer() + "']").click();
     }
 
-    @Step
+    @Step("Загружает файл и проверяет, что он отображается")
     public void uploadFile(String extension) {
         buttonFileUpload.uploadFile(new File("src/test/resources/Attachments." + extension));
         checkAttachmentExtension(extension);
     }
 
-    @Step
-    public void checkAttachmentExtension (String extension) {
+    @Step("Проверяет по расширению загруженный файл")
+    public void checkAttachmentExtension(String extension) {
         $x("//span[contains(text(),'" + extension + "')]").shouldBe(Condition.visible);
 
     }
 
-    @Step
-    public void uploadAllExtensions (String attachPdf,
+    @Step("Загружает несколько вложений и проверяет что они отображаются")
+    public void uploadAllExtensions(String attachPdf,
                                     String attachJpg,
                                     String attachDocx,
                                     String attachPng,
@@ -142,25 +142,25 @@ public class QuestionnairePage {
         buttonFileUpload.uploadFile(new File("src/test/resources/Attachments." + attachJpg));
         buttonFileUpload.uploadFile(new File("src/test/resources/Attachments." + attachPng));
         buttonFileUpload.uploadFile(new File("src/test/resources/Attachments." + attachXlsx));
-       checkAttachmentExtension(attachPdf);
-       checkAttachmentExtension(attachXlsx);
-       checkAttachmentExtension(attachJpg);
-       checkAttachmentExtension(attachPng);
-       checkAttachmentExtension(attachXlsx);
+        checkAttachmentExtension(attachPdf);
+        checkAttachmentExtension(attachXlsx);
+        checkAttachmentExtension(attachJpg);
+        checkAttachmentExtension(attachPng);
+        checkAttachmentExtension(attachXlsx);
     }
 
-    @Step
+    @Step("Клик по чекбоксу")
     public void checkboxClick() {
         checkbox.click();
     }
 
-    @Step
+    @Step("Заполняет в 13 и 17 запросе поле Дата начала")
     private void fillDateStart(int minusYearsFromNow, String dateFormat) {
         start.click();
         start.val(generateDate(minusYearsFromNow, dateFormat)).pressEnter();
     }
 
-    @Step
+    @Step("Заполняет в 13 и 17 запросе поле Дата окончания")
     private void fillEnd(int minusYearsFromNow, String dateFormat) {
         end.click();
         end.val(generateDate(minusYearsFromNow, dateFormat)).pressEnter();
@@ -234,20 +234,20 @@ public class QuestionnairePage {
         edit.shouldBe(Condition.visible);
     }
 
-    @Step
+    @Step("Отправить анкету на почту, проверка об успешности")
     public void submitClick() {
         submit.click();
         successful.waitUntil(Condition.visible, 10000);
     }
 
-    @Step
+    @Step("Удалить строку в таблице, удаляет первую сверху")
     public void deleteLine() {
         delete.click();
         deleteConfirmQuestion.shouldBe(Condition.visible);
         deleteConfirmQuestionOK.click();
     }
 
-    @Step
+    @Step("Отправить анкету на проверку, ссылка мертвая, проверка на то что ссылка умерла")
     public void submitClickByDeadLink() {
         submit.click();
         declinedLinkIsDeath.shouldBe(Condition.visible);

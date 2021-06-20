@@ -1,7 +1,6 @@
 package com.gsmserver.data;
 
 import com.github.javafaker.Faker;
-import io.qameta.allure.Step;
 
 import java.security.SecureRandom;
 import java.time.LocalDate;
@@ -33,32 +32,6 @@ public class DataHelper {
         return patronymic.get(1);
     }
 
-    public static class FullName {
-       private static String firstname;
-       private static String lastname;
-       private static String patronymic;
-
-    public void generateFullName() {
-        firstname = generateCandidateFirstName();
-        lastname = generateCandidateLastName();
-        patronymic = generateCandidatePatronymic();
-    }
-
-        public static String getLastname() {
-            return lastname;
-        }
-
-        public static String getPatronymic() {
-            return patronymic;
-        }
-
-        public static String getFirstname() {
-            return firstname;
-        }
-    }
-
-  // Методы для анкеты
-
     public static String generateText(int length, String alphabet) {
         SecureRandom rnd = new SecureRandom();
         StringBuilder sb = new StringBuilder(Math.max(length, 16));
@@ -72,33 +45,33 @@ public class DataHelper {
         return sb.toString();
     }
 
+    // Методы для анкеты
+
     public static String generateChangeFullName() {
         return new Faker(new Locale("ru")).name().nameWithMiddle();
     }
 
     public static String generateDateBirthData() {
         return new Faker(new Locale("ru")).name().nameWithMiddle() + " " +
-        new Faker(new Locale("ru")).address().city();
+                new Faker(new Locale("ru")).address().city();
     }
-
 
     public static String generatePassportData() {
         Faker faker = new Faker(new Locale("ru"));
         String startPassportCode = faker.code().imei().substring(0, 4);
-        String endPassportCode = faker.random().nextInt(1,1000000).toString();
+        String endPassportCode = faker.random().nextInt(1, 1000000).toString();
         String city = faker.address().cityName();
-        Date date = faker.date().birthday(20,30);
-        return "Серия: " + startPassportCode + " №" + endPassportCode + " Выдан ОВД г."+ city +" дата выдачи:"+ date;
+        Date date = faker.date().birthday(20, 30);
+        return "Серия: " + startPassportCode + " №" + endPassportCode + " Выдан ОВД г." + city + " дата выдачи:" + date;
     }
 
     public static String generateTaxPayerNumber() {
-        return new Faker(new Locale("ru")).code().imei().substring(0,11);
+        return new Faker(new Locale("ru")).code().imei().substring(0, 11);
     }
 
     public static String generateContacts() {
         return new Faker(new Locale("ru")).internet().emailAddress();
     }
-
 
     public static String generateAnswer() {
         ArrayList<String> answer = new ArrayList<>(Arrays.
@@ -111,10 +84,34 @@ public class DataHelper {
         return new Faker(new Locale("ru")).educator().university();
     }
 
-    public static String generateDate (int minusYearsFromNow,String dateFormat){
+    public static String generateDate(int minusYearsFromNow, String dateFormat) {
         LocalDate dayDeliveryCard = LocalDate.now().minusYears(minusYearsFromNow);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
         return dayDeliveryCard.format(formatter);
+    }
+
+    public static class FullName {
+        private static String firstname;
+        private static String lastname;
+        private static String patronymic;
+
+        public static String getLastname() {
+            return lastname;
+        }
+
+        public static String getPatronymic() {
+            return patronymic;
+        }
+
+        public static String getFirstname() {
+            return firstname;
+        }
+
+        public void generateFullName() {
+            firstname = generateCandidateFirstName();
+            lastname = generateCandidateLastName();
+            patronymic = generateCandidatePatronymic();
+        }
     }
 
 }

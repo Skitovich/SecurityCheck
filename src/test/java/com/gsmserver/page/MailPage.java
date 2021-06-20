@@ -19,25 +19,35 @@ public class MailPage {
     public MailPage() {
     }
 
-    @Step
+    @Step("Открывает яндекс почту")
     public void goToYandexMail() {
         open("https://mail.yandex.ru/?from=header-360&uid=1130000048345014#inbox");
     }
 
-    @Step
+    @Step("Логинится если видит стартовую страницу, если не видит сразу обновляет почтовый ящик и ищет письмо")
+    public void checkLoginMailAndCheckAttach(String filename) {
+        if (enterMail.is(Condition.visible)) {
+            loginYandexMail();
+        }
+        refreshInbox();
+        openMailByTitle();
+        checkAttachments(filename);
+    }
+
+    @Step("Нажать кнопку обновить")
     private void refreshInbox() {
         sleep(15000);
         refresh.shouldBe(Condition.visible).click();
     }
 
-    @Step
+    @Step("Открывает письмо по Имени Отчеству в заголовке письма")
     private void openMailByTitle() {
         $x("//span[contains(text()," +
                 "'" + DataHelper.FullName.getPatronymic() + " " + DataHelper.FullName.getLastname() + "')]").
                 waitUntil(Condition.visible, 20000).click();
     }
 
-    @Step
+    @Step("Вход в почтовый ящик")
     private void loginYandexMail() {
         enterMail.click();
         login.val("TestNspkAnketa");
@@ -47,7 +57,7 @@ public class MailPage {
         refresh.shouldBe(Condition.visible);
     }
 
-    @Step
+    @Step("Проверка вложений")
     private void checkAttachments(String fileName) {
         $x("//div[contains(text()," +
                 "'" + DataHelper.FullName.getPatronymic() + " " + DataHelper.FullName.getLastname() + "')]")
@@ -57,14 +67,6 @@ public class MailPage {
         attachDocx.shouldHave(Condition.exist);
     }
 
-    @Step
-    public void checkLoginMailAndCheckAttach(String filename) {
-        if (enterMail.is(Condition.visible)) {
-            loginYandexMail();
-        }
-        refreshInbox();
-        openMailByTitle();
-        checkAttachments(filename);
-    }
+
 
 }

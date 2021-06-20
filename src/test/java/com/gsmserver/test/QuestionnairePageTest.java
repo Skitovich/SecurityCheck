@@ -46,7 +46,7 @@ public class QuestionnairePageTest extends BaseTest {
         mailPage.goToYandexMail();
         mailPage.checkLoginMailAndCheckAttach(attachJpg);
     }
-    
+
 
     @Test
     void shouldSuccessfullyPassedValueEveryTextField2000char() {
