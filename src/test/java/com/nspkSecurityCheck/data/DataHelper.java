@@ -70,7 +70,7 @@ public class DataHelper {
     }
 
     public static String generateContacts() {
-        return new Faker(new Locale("ru")).internet().emailAddress();
+        return new Faker().internet().emailAddress();
     }
 
     public static String generateAnswer() {

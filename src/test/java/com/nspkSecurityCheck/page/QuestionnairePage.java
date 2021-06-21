@@ -1,13 +1,17 @@
 package com.nspkSecurityCheck.page;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.nspkSecurityCheck.data.DataHelper;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 
 import java.io.File;
+import java.util.Random;
 
 import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.elements;
 import static com.nspkSecurityCheck.data.DataHelper.*;
 
 
@@ -43,7 +47,7 @@ public class QuestionnairePage {
     private static final SelenideElement insert = $x("//span[@aria-label='check']");
     private static final SelenideElement edit = $x("//*[@data-icon='edit']");
     private static final SelenideElement submit = $x("//button[@type='submit']");
-    private static final SelenideElement delete = $x("//*[@data-icon='delete']");
+    private static final ElementsCollection delete = elements(By.xpath("//*[@data-icon='delete']"));
     private static final SelenideElement deleteConfirmQuestionOK = $x("//span[text()='OK']");
     private static final SelenideElement deleteConfirmQuestion =
             $x("//div[text()='Вы уверены, что хотите удалить запись?']");
@@ -55,6 +59,7 @@ public class QuestionnairePage {
     private static final SelenideElement declinedLinkIsDeath =
             $x("//span[text()='Данная ссылка некорректна или неактуальна']");
     private final String alphabet = "АаБбВвГгДдЕеЁёЖжЗзИиКкЛлМмНн ОоПпРрСсТУуФфЦцЮюЯяЭэХх    ";
+
 
 
     public QuestionnairePage() {
@@ -236,7 +241,7 @@ public class QuestionnairePage {
     public void fill13QuestionManyTimes(int minusYearsFromNow, String dateFormat) {
         int maxRows = 10;
         while (maxRows >= 0) {
-            fillQuestion13(minusYearsFromNow, dateFormat);
+            fillQuestion13(minusYearsFromNow + maxRows, dateFormat);
             maxRows--;
         }
     }
@@ -245,7 +250,7 @@ public class QuestionnairePage {
     public void fill14QuestionManyTimes(int minusYearsFromNow, String dateFormat) {
         int maxRows = 10;
         while (maxRows >= 0) {
-            fillQuestion14(minusYearsFromNow, dateFormat);
+            fillQuestion14(minusYearsFromNow + maxRows, dateFormat);
             maxRows--;
         }
     }
@@ -254,7 +259,7 @@ public class QuestionnairePage {
     public void fill17QuestionManyTimes(int minusYearsFromNow, String dateFormat) {
         int maxRows = 10;
         while (maxRows >= 0) {
-            fillQuestion17(minusYearsFromNow, dateFormat);
+            fillQuestion17(minusYearsFromNow + maxRows, dateFormat);
             maxRows--;
         }
     }
@@ -265,18 +270,22 @@ public class QuestionnairePage {
         successful.waitUntil(Condition.visible, 10000);
     }
 
-    @Step("Удалить строку в таблице, удаляет первую сверху")
-    public void deleteLine() {
-        delete.click();
-        deleteConfirmQuestion.shouldBe(Condition.visible);
-        deleteConfirmQuestionOK.click();
-    }
-
     @Step("Отправить анкету на проверку, ссылка мертвая, проверка на то что ссылка умерла")
     public void submitClickByDeadLink() {
         submit.click();
         declinedLinkIsDeath.shouldBe(Condition.visible);
     }
 
+
+    @Step("Удаляет случаную строку из таблицы и проверяет количество линий")
+    public void randomRowDelete() {
+        Random random = new Random();
+        int size = delete.size();
+        int num = random.nextInt(size);
+        delete.get(num).click();
+        deleteConfirmQuestion.shouldBe(Condition.visible);
+        deleteConfirmQuestionOK.click();
+        delete.shouldHaveSize(size - 1);
+    }
 
 }

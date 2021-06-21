@@ -77,6 +77,7 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.fill13QuestionManyTimes(minusYearsFromNow,dateFormatMonthYear);
         questionnairePage.fill14QuestionManyTimes(minusYearsFromNow,dateFormatYear);
         questionnairePage.fill17QuestionManyTimes(minusYearsFromNow,dateFormatMonthYear);
+        questionnairePage.randomRowDelete();
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
         questionnairePage.uploadFile(attachJpg);
@@ -94,6 +95,7 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.fillQuestion13(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.fillQuestion14(minusYearsFromNow, dateFormatYear);
         questionnairePage.fillQuestion17(minusYearsFromNow, dateFormatMonthYear);
+        questionnairePage.randomRowDelete();
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
         questionnairePage.uploadFile(attachJpg);
@@ -110,9 +112,9 @@ public class QuestionnairePageTest extends BaseTest {
         val questionnairePage = new QuestionnairePage();
         questionnairePage.fillGeneratedValues();
         questionnairePage.fill13QuestionAndEdit(minusYearsFromNow, dateFormatMonthYear);
-        questionnairePage.deleteLine();
+        questionnairePage.randomRowDelete();
         questionnairePage.fill14QuestionAndEdit(minusYearsFromNow, dateFormatYear);
-        questionnairePage.deleteLine();
+        questionnairePage.randomRowDelete();
         questionnairePage.fill17QuestionAndEdit(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
