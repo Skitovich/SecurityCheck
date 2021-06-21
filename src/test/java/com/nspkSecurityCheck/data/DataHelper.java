@@ -74,8 +74,7 @@ public class DataHelper {
     }
 
     public static String generateAnswer() {
-        ArrayList<String> answer = new ArrayList<>(Arrays.
-                asList("Да", "Нет"));
+        ArrayList<String> answer = new ArrayList<>(Arrays.asList("Да", "Нет"));
         Collections.shuffle(answer);
         return answer.get(0);
     }

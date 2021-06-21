@@ -61,7 +61,6 @@ public class QuestionnairePage {
     private final String alphabet = "АаБбВвГгДдЕеЁёЖжЗзИиКкЛлМмНн ОоПпРрСсТУуФфЦцЮюЯяЭэХх    ";
 
 
-
     public QuestionnairePage() {
         questionnairePage.shouldBe(Condition.visible);
     }
@@ -277,7 +276,7 @@ public class QuestionnairePage {
     }
 
 
-    @Step("Удаляет случаную строку из таблицы и проверяет количество линий")
+    @Step("Удаляет случаную строку из таблицы и проверяет количество строк")
     public void randomRowDelete() {
         Random random = new Random();
         int size = delete.size();
