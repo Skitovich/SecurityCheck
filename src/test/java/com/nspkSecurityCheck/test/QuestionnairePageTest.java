@@ -20,6 +20,7 @@ public class QuestionnairePageTest extends BaseTest {
     int minusYearsFromNow = 3;
     String dateFormatMonthYear = "MM.yyyy";
     String dateFormatYear = "yyyy";
+    int linkLifetime = 300000;
 
 
 
@@ -151,7 +152,7 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
         questionnairePage.uploadFile(attachJpg);
         questionnairePage.checkboxClick();
-        sleep(300000);
+        sleep(linkLifetime);
         questionnairePage.submitClickByDeadLink();
     }
 }

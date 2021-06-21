@@ -38,7 +38,6 @@ public class QuestionnairePage {
     private static final SelenideElement hobbies = $x("//textarea[@id='formData_hobbies']");
     private static final SelenideElement buttonFileUpload = $x("//input[@type='file']");
     private static final SelenideElement checkbox = $x("//input[@type='checkbox']");
-    //Табличные вопросы 13,14,17
     private static final SelenideElement start = $x("//input[@id='timeStart']");
     private static final SelenideElement end = $x("//input[@id='timeEnd']");
     private static final SelenideElement insert = $x("//span[@aria-label='check']");
@@ -81,7 +80,7 @@ public class QuestionnairePage {
         hobbies.val(DataHelper.generateText(20, alphabet));
     }
 
-    @Step("Генерация 2000 символов во все текстовые поля")
+    @Step("Генерация 2000 символов для всех текстовых полей")
     public void fillGeneratedValues2000char() {
         int howManyLetters = 2000;
         changeFullName.val(generateText(howManyLetters, alphabet));
@@ -128,7 +127,6 @@ public class QuestionnairePage {
     @Step("Проверяет по расширению загруженный файл")
     public void checkAttachmentExtension(String extension) {
         $x("//span[contains(text(),'" + extension + "')]").shouldBe(Condition.visible);
-
     }
 
     @Step("Загружает несколько вложений и проверяет что они отображаются")
