@@ -154,7 +154,7 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
         questionnairePage.uploadFile(attachJpg);
         questionnairePage.checkboxClick();
-        sleep(360000);
+        sleep(300000);
         questionnairePage.submitClickByDeadLink();
     }
 }
