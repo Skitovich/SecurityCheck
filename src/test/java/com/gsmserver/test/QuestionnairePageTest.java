@@ -19,6 +19,7 @@ public class QuestionnairePageTest extends BaseTest {
     String attachPdf = "pdf";
     String attachXlsx = "xlsx";
 
+
     int minusYearsFromNow = 3;
 
 
@@ -67,41 +68,17 @@ public class QuestionnairePageTest extends BaseTest {
 
     @Test
     void shouldSuccessfullyPassed10ValuesEveryTableQuestion() {
+        int maxRows = 10;
         val validationPage = new ValidationPage();
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.openLink(getAuthInfo);
         val questionnairePage = new QuestionnairePage();
         questionnairePage.fillGeneratedValues();
-        questionnairePage.fillQuestion13(minusYearsFromNow + 1, "MM.yyyy");
-        questionnairePage.fillQuestion13(minusYearsFromNow + 2, "MM.yyyy");
-        questionnairePage.fillQuestion13(minusYearsFromNow + 3, "MM.yyyy");
-        questionnairePage.fillQuestion13(minusYearsFromNow + 4, "MM.yyyy");
-        questionnairePage.fillQuestion13(minusYearsFromNow + 5, "MM.yyyy");
-        questionnairePage.fillQuestion13(minusYearsFromNow + 6, "MM.yyyy");
-        questionnairePage.fillQuestion13(minusYearsFromNow + 7, "MM.yyyy");
-        questionnairePage.fillQuestion13(minusYearsFromNow + 8, "MM.yyyy");
-        questionnairePage.fillQuestion13(minusYearsFromNow + 9, "MM.yyyy");
-        questionnairePage.fillQuestion13(minusYearsFromNow + 10, "MM.yyyy");
-        questionnairePage.fillQuestion14(minusYearsFromNow + 1, "yyyy");
-        questionnairePage.fillQuestion14(minusYearsFromNow + 2, "yyyy");
-        questionnairePage.fillQuestion14(minusYearsFromNow + 3, "yyyy");
-        questionnairePage.fillQuestion14(minusYearsFromNow + 4, "yyyy");
-        questionnairePage.fillQuestion14(minusYearsFromNow + 5, "yyyy");
-        questionnairePage.fillQuestion14(minusYearsFromNow + 6, "yyyy");
-        questionnairePage.fillQuestion14(minusYearsFromNow + 7, "yyyy");
-        questionnairePage.fillQuestion14(minusYearsFromNow + 8, "yyyy");
-        questionnairePage.fillQuestion14(minusYearsFromNow + 9, "yyyy");
-        questionnairePage.fillQuestion14(minusYearsFromNow + 10, "yyyy");
-        questionnairePage.fillQuestion17(minusYearsFromNow + 1, "MM.yyyy");
-        questionnairePage.fillQuestion17(minusYearsFromNow + 2, "MM.yyyy");
-        questionnairePage.fillQuestion17(minusYearsFromNow + 3, "MM.yyyy");
-        questionnairePage.fillQuestion17(minusYearsFromNow + 4, "MM.yyyy");
-        questionnairePage.fillQuestion17(minusYearsFromNow + 5, "MM.yyyy");
-        questionnairePage.fillQuestion17(minusYearsFromNow + 6, "MM.yyyy");
-        questionnairePage.fillQuestion17(minusYearsFromNow + 7, "MM.yyyy");
-        questionnairePage.fillQuestion17(minusYearsFromNow + 8, "MM.yyyy");
-        questionnairePage.fillQuestion17(minusYearsFromNow + 9, "MM.yyyy");
-        questionnairePage.fillQuestion17(minusYearsFromNow + 10, "MM.yyyy");
+        while (maxRows >= 0) {
+            questionnairePage.fillQuestion13(minusYearsFromNow + maxRows,"MM.yyyy");
+            questionnairePage.fillQuestion14(minusYearsFromNow + maxRows,"yyyy");
+            questionnairePage.fillQuestion17(minusYearsFromNow + maxRows,"MM.yyyy");
+            maxRows--; }
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
         questionnairePage.uploadFile(attachJpg);

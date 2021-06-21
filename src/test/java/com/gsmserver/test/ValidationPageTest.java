@@ -36,6 +36,7 @@ public class ValidationPageTest extends BaseTest {
     void shouldGenerateLinkWih2000chars() {
         val validationPage = new ValidationPage();
         validationPage.fillForm2000chars();
+
     }
 
     @Test
