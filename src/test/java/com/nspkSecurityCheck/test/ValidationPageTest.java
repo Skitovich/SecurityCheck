@@ -1,7 +1,7 @@
-package com.gsmserver.test;
+package com.nspkSecurityCheck.test;
 
-import com.gsmserver.data.DataHelper;
-import com.gsmserver.page.ValidationPage;
+import com.nspkSecurityCheck.data.DataHelper;
+import com.nspkSecurityCheck.page.ValidationPage;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.sleep;
 
 public class ValidationPageTest extends BaseTest {
-    int linkLifetime = 360000;
+    int linkLifetime = 300000;
 
     @BeforeEach
     void openHomePage() {

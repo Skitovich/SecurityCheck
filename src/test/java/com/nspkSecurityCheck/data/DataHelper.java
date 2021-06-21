@@ -1,4 +1,4 @@
-package com.gsmserver.data;
+package com.nspkSecurityCheck.data;
 
 import com.github.javafaker.Faker;
 

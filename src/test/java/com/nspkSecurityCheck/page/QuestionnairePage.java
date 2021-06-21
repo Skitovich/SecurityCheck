@@ -1,14 +1,14 @@
-package com.gsmserver.page;
+package com.nspkSecurityCheck.page;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import com.gsmserver.data.DataHelper;
+import com.nspkSecurityCheck.data.DataHelper;
 import io.qameta.allure.Step;
 
 import java.io.File;
 
 import static com.codeborne.selenide.Selenide.$x;
-import static com.gsmserver.data.DataHelper.*;
+import static com.nspkSecurityCheck.data.DataHelper.*;
 
 
 public class QuestionnairePage {
@@ -232,6 +232,33 @@ public class QuestionnairePage {
         organizationContacts.val(generateText(30, alphabet));
         insert.click();
         edit.shouldBe(Condition.visible);
+    }
+
+    @Step("Заполнение 13 вопроса {maxRows} раз")
+    public void fill13QuestionManyTimes(int minusYearsFromNow, String dateFormat) {
+        int maxRows = 10;
+        while (maxRows >= 0) {
+            fillQuestion13(minusYearsFromNow, dateFormat);
+            maxRows--;
+        }
+    }
+
+    @Step("Заполнение 14 вопроса {maxRows} раз")
+    public void fill14QuestionManyTimes(int minusYearsFromNow, String dateFormat) {
+        int maxRows = 10;
+        while (maxRows >= 0) {
+            fillQuestion14(minusYearsFromNow, dateFormat);
+            maxRows--;
+        }
+    }
+
+    @Step("Заполнение 17 вопроса {maxRows} раз")
+    public void fill17QuestionManyTimes(int minusYearsFromNow, String dateFormat) {
+        int maxRows = 10;
+        while (maxRows >= 0) {
+            fillQuestion17(minusYearsFromNow, dateFormat);
+            maxRows--;
+        }
     }
 
     @Step("Отправить анкету на почту, проверка об успешности")

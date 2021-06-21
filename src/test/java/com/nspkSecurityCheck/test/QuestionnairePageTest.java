@@ -1,15 +1,14 @@
-package com.gsmserver.test;
+package com.nspkSecurityCheck.test;
 
-import com.gsmserver.data.DataHelper;
-import com.gsmserver.page.MailPage;
-import com.gsmserver.page.QuestionnairePage;
-import com.gsmserver.page.ValidationPage;
+import com.nspkSecurityCheck.data.DataHelper;
+import com.nspkSecurityCheck.page.MailPage;
+import com.nspkSecurityCheck.page.QuestionnairePage;
+import com.nspkSecurityCheck.page.ValidationPage;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 
 
 public class QuestionnairePageTest extends BaseTest {
@@ -18,9 +17,10 @@ public class QuestionnairePageTest extends BaseTest {
     String attachPng = "png";
     String attachPdf = "pdf";
     String attachXlsx = "xlsx";
-
-
     int minusYearsFromNow = 3;
+    String dateFormatMonthYear = "MM.yyyy";
+    String dateFormatYear = "yyyy";
+
 
 
     @BeforeEach
@@ -36,9 +36,9 @@ public class QuestionnairePageTest extends BaseTest {
         val questionnairePage = new QuestionnairePage();
         val mailPage = new MailPage();
         questionnairePage.fillGeneratedValues();
-        questionnairePage.fillQuestion13(minusYearsFromNow, "MM.yyyy");
-        questionnairePage.fillQuestion14(minusYearsFromNow, "yyyy");
-        questionnairePage.fillQuestion17(minusYearsFromNow, "MM.yyyy");
+        questionnairePage.fillQuestion13(minusYearsFromNow, dateFormatMonthYear);
+        questionnairePage.fillQuestion14(minusYearsFromNow, dateFormatYear);
+        questionnairePage.fillQuestion17(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
         questionnairePage.uploadFile(attachJpg);
@@ -56,9 +56,9 @@ public class QuestionnairePageTest extends BaseTest {
         validationPage.openLink(getAuthInfo);
         val questionnairePage = new QuestionnairePage();
         questionnairePage.fillGeneratedValues2000char();
-        questionnairePage.fillQuestion13(minusYearsFromNow, "MM.yyyy");
-        questionnairePage.fillQuestion14(minusYearsFromNow, "yyyy");
-        questionnairePage.fillQuestion17(minusYearsFromNow, "MM.yyyy");
+        questionnairePage.fillQuestion13(minusYearsFromNow, dateFormatMonthYear);
+        questionnairePage.fillQuestion14(minusYearsFromNow, dateFormatYear);
+        questionnairePage.fillQuestion17(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
         questionnairePage.uploadFile(attachJpg);
@@ -68,17 +68,14 @@ public class QuestionnairePageTest extends BaseTest {
 
     @Test
     void shouldSuccessfullyPassed10ValuesEveryTableQuestion() {
-        int maxRows = 10;
         val validationPage = new ValidationPage();
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.openLink(getAuthInfo);
         val questionnairePage = new QuestionnairePage();
         questionnairePage.fillGeneratedValues();
-        while (maxRows >= 0) {
-            questionnairePage.fillQuestion13(minusYearsFromNow + maxRows,"MM.yyyy");
-            questionnairePage.fillQuestion14(minusYearsFromNow + maxRows,"yyyy");
-            questionnairePage.fillQuestion17(minusYearsFromNow + maxRows,"MM.yyyy");
-            maxRows--; }
+        questionnairePage.fill13QuestionManyTimes(minusYearsFromNow,dateFormatMonthYear);
+        questionnairePage.fill14QuestionManyTimes(minusYearsFromNow,dateFormatYear);
+        questionnairePage.fill17QuestionManyTimes(minusYearsFromNow,dateFormatMonthYear);
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
         questionnairePage.uploadFile(attachJpg);
@@ -93,9 +90,9 @@ public class QuestionnairePageTest extends BaseTest {
         validationPage.openLink(getAuthInfo);
         val questionnairePage = new QuestionnairePage();
         questionnairePage.fillGeneratedValues();
-        questionnairePage.fillQuestion13(minusYearsFromNow, "MM.yyyy");
-        questionnairePage.fillQuestion14(minusYearsFromNow, "yyyy");
-        questionnairePage.fillQuestion17(minusYearsFromNow, "MM.yyyy");
+        questionnairePage.fillQuestion13(minusYearsFromNow, dateFormatMonthYear);
+        questionnairePage.fillQuestion14(minusYearsFromNow, dateFormatYear);
+        questionnairePage.fillQuestion17(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
         questionnairePage.uploadFile(attachJpg);
@@ -111,11 +108,11 @@ public class QuestionnairePageTest extends BaseTest {
         validationPage.openLink(getAuthInfo);
         val questionnairePage = new QuestionnairePage();
         questionnairePage.fillGeneratedValues();
-        questionnairePage.fill13QuestionAndEdit(minusYearsFromNow, "MM.yyyy");
+        questionnairePage.fill13QuestionAndEdit(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.deleteLine();
-        questionnairePage.fill14QuestionAndEdit(minusYearsFromNow, "yyyy");
+        questionnairePage.fill14QuestionAndEdit(minusYearsFromNow, dateFormatYear);
         questionnairePage.deleteLine();
-        questionnairePage.fill17QuestionAndEdit(minusYearsFromNow, "MM.yyyy");
+        questionnairePage.fill17QuestionAndEdit(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
         questionnairePage.uploadFile(attachJpg);
@@ -130,9 +127,9 @@ public class QuestionnairePageTest extends BaseTest {
         validationPage.openLink(getAuthInfo);
         val questionnairePage = new QuestionnairePage();
         questionnairePage.fillGeneratedValues();
-        questionnairePage.fillQuestion13(minusYearsFromNow, "MM.yyyy");
-        questionnairePage.fillQuestion14(minusYearsFromNow, "yyyy");
-        questionnairePage.fillQuestion17(minusYearsFromNow, "MM.yyyy");
+        questionnairePage.fillQuestion13(minusYearsFromNow, dateFormatMonthYear);
+        questionnairePage.fillQuestion14(minusYearsFromNow, dateFormatYear);
+        questionnairePage.fillQuestion17(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
         questionnairePage.uploadAllExtensions(attachPdf, attachJpg, attachDocx, attachPng, attachXlsx);
@@ -147,9 +144,9 @@ public class QuestionnairePageTest extends BaseTest {
         validationPage.openLink(getAuthInfo);
         val questionnairePage = new QuestionnairePage();
         questionnairePage.fillGeneratedValues();
-        questionnairePage.fillQuestion13(minusYearsFromNow, "MM.yyyy");
-        questionnairePage.fillQuestion14(minusYearsFromNow, "yyyy");
-        questionnairePage.fillQuestion17(minusYearsFromNow, "MM.yyyy");
+        questionnairePage.fillQuestion13(minusYearsFromNow, dateFormatMonthYear);
+        questionnairePage.fillQuestion14(minusYearsFromNow, dateFormatYear);
+        questionnairePage.fillQuestion17(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
         questionnairePage.uploadFile(attachJpg);

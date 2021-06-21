@@ -1,4 +1,4 @@
-package com.gsmserver.test;
+package com.nspkSecurityCheck.test;
 
 import com.codeborne.selenide.AssertionMode;
 import com.codeborne.selenide.Configuration;

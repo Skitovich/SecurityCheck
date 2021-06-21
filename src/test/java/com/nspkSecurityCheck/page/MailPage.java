@@ -1,8 +1,8 @@
-package com.gsmserver.page;
+package com.nspkSecurityCheck.page;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import com.gsmserver.data.DataHelper;
+import com.nspkSecurityCheck.data.DataHelper;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.*;
