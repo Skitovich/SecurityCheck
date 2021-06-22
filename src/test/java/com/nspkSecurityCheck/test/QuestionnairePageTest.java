@@ -23,7 +23,6 @@ public class QuestionnairePageTest extends BaseTest {
     int linkLifetime = 300000;
 
 
-
     @BeforeEach
     void openHomePage() {
         open("");
@@ -74,9 +73,9 @@ public class QuestionnairePageTest extends BaseTest {
         validationPage.openLink(getAuthInfo);
         val questionnairePage = new QuestionnairePage();
         questionnairePage.fillGeneratedValues();
-        questionnairePage.fill13QuestionManyTimes(minusYearsFromNow,dateFormatMonthYear);
-        questionnairePage.fill14QuestionManyTimes(minusYearsFromNow,dateFormatYear);
-        questionnairePage.fill17QuestionManyTimes(minusYearsFromNow,dateFormatMonthYear);
+        questionnairePage.fill13QuestionManyTimes(minusYearsFromNow, dateFormatMonthYear);
+        questionnairePage.fill14QuestionManyTimes(minusYearsFromNow, dateFormatYear);
+        questionnairePage.fill17QuestionManyTimes(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.randomRowDelete();
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();

@@ -14,7 +14,6 @@ import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.elements;
 import static com.nspkSecurityCheck.data.DataHelper.*;
 
-
 public class QuestionnairePage {
     private static final SelenideElement questionnairePage = $x("//h1[text()='Анкета']");
     private static final SelenideElement changeFullName = $x("//textarea[@id='formData_changeFullName']");
@@ -47,7 +46,7 @@ public class QuestionnairePage {
     private static final SelenideElement insert = $x("//span[@aria-label='check']");
     private static final SelenideElement edit = $x("//*[@data-icon='edit']");
     private static final SelenideElement submit = $x("//button[@type='submit']");
-    private static final ElementsCollection delete = elements(By.xpath("//*[@data-icon='delete']"));
+    private static final ElementsCollection deleteButtonCollection = elements(By.xpath("//*[@data-icon='delete']"));
     private static final SelenideElement deleteConfirmQuestionOK = $x("//span[text()='OK']");
     private static final SelenideElement deleteConfirmQuestion =
             $x("//div[text()='Вы уверены, что хотите удалить запись?']");
@@ -279,12 +278,12 @@ public class QuestionnairePage {
     @Step("Удаляет случаную строку из таблицы и проверяет количество строк")
     public void randomRowDelete() {
         Random random = new Random();
-        int size = delete.size();
-        int num = random.nextInt(size);
-        delete.get(num).click();
+        int size = deleteButtonCollection.size();
+        int num = random.nextInt(size - 1);
+        deleteButtonCollection.get(num).click();
         deleteConfirmQuestion.shouldBe(Condition.visible);
         deleteConfirmQuestionOK.click();
-        delete.shouldHaveSize(size - 1);
+        deleteButtonCollection.shouldHaveSize(size - 1);
     }
 
 }
