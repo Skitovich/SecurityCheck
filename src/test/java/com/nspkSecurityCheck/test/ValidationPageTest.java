@@ -10,7 +10,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.sleep;
 
 public class ValidationPageTest extends BaseTest {
-    int linkLifetime = 300000;
+    int linkLifetime = 90000;
 
     @BeforeEach
     void openHomePage() {
@@ -47,5 +47,4 @@ public class ValidationPageTest extends BaseTest {
         sleep(linkLifetime);
         validationPage.openExpiredLink();
     }
-
 }

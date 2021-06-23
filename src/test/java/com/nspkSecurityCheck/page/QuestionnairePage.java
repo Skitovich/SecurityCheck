@@ -55,6 +55,8 @@ public class QuestionnairePage {
     private static final SelenideElement registrationAddress =
             $x("//textarea[@id='residenceAndRegistrationAddress']");
     private static final SelenideElement successful = $x("//div[text()='Данные успешно отправлены']");
+    private static final SelenideElement checkboxClick =
+            $x("//span[contains(@class,'ant-checkbox-checked')]");
     private static final SelenideElement declinedLinkIsDeath =
             $x("//span[text()='Данная ссылка некорректна или неактуальна']");
     private final String alphabet = "АаБбВвГгДдЕеЁёЖжЗзИиКкЛлМмНн ОоПпРрСсТУуФфЦцЮюЯяЭэХх    ";
@@ -237,7 +239,7 @@ public class QuestionnairePage {
 
     @Step("Заполнение 13 вопроса {maxRows} раз")
     public void fill13QuestionManyTimes(int minusYearsFromNow, String dateFormat) {
-        int maxRows = 10;
+        int maxRows = 5;
         while (maxRows >= 0) {
             fillQuestion13(minusYearsFromNow + maxRows, dateFormat);
             maxRows--;
@@ -246,7 +248,7 @@ public class QuestionnairePage {
 
     @Step("Заполнение 14 вопроса {maxRows} раз")
     public void fill14QuestionManyTimes(int minusYearsFromNow, String dateFormat) {
-        int maxRows = 10;
+        int maxRows = 5;
         while (maxRows >= 0) {
             fillQuestion14(minusYearsFromNow + maxRows, dateFormat);
             maxRows--;
@@ -255,21 +257,23 @@ public class QuestionnairePage {
 
     @Step("Заполнение 17 вопроса {maxRows} раз")
     public void fill17QuestionManyTimes(int minusYearsFromNow, String dateFormat) {
-        int maxRows = 10;
+        int maxRows = 5;
         while (maxRows >= 0) {
             fillQuestion17(minusYearsFromNow + maxRows, dateFormat);
             maxRows--;
         }
     }
 
-    @Step("Отправить анкету на почту, проверка об успешности")
+    @Step("Отправить анкету на почту, проверка об успешности и проверка что нажат чекбокс")
     public void submitClick() {
+        checkboxClick.shouldBe(Condition.visible);
         submit.click();
         successful.waitUntil(Condition.visible, 10000);
     }
 
-    @Step("Отправить анкету на проверку, ссылка мертвая, проверка на то что ссылка умерла")
+    @Step("Отправить анкету на проверку, ссылка мертвая, проверка на то что ссылка умерла, проверка что чекбокс нажат")
     public void submitClickByDeadLink() {
+        checkboxClick.shouldBe(Condition.visible);
         submit.click();
         declinedLinkIsDeath.shouldBe(Condition.visible);
     }
@@ -279,7 +283,7 @@ public class QuestionnairePage {
     public void randomRowDelete() {
         Random random = new Random();
         int size = deleteButtonCollection.size();
-        int num = random.nextInt(size - 1);
+        int num = random.nextInt(size);
         deleteButtonCollection.get(num).click();
         deleteConfirmQuestion.shouldBe(Condition.visible);
         deleteConfirmQuestionOK.click();

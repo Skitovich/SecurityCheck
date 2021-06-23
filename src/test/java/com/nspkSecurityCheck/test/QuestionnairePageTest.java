@@ -20,7 +20,7 @@ public class QuestionnairePageTest extends BaseTest {
     int minusYearsFromNow = 3;
     String dateFormatMonthYear = "MM.yyyy";
     String dateFormatYear = "yyyy";
-    int linkLifetime = 300000;
+    int linkLifetime = 90000;
 
 
     @BeforeEach
@@ -66,8 +66,9 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.submitClick();
     }
 
+
     @Test
-    void shouldSuccessfullyPassed10ValuesEveryTableQuestion() {
+    void shouldSuccessfullyPassedFiveValuesEveryTableQuestion() {
         val validationPage = new ValidationPage();
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.openLink(getAuthInfo);
@@ -76,6 +77,8 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.fill13QuestionManyTimes(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.fill14QuestionManyTimes(minusYearsFromNow, dateFormatYear);
         questionnairePage.fill17QuestionManyTimes(minusYearsFromNow, dateFormatMonthYear);
+        questionnairePage.randomRowDelete();
+        questionnairePage.randomRowDelete();
         questionnairePage.randomRowDelete();
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
@@ -102,19 +105,34 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.submitClick();
     }
 
-
     @Test
-    void shouldEditAndDeleteOneValueEachTableQuestionAndSubmitForm() {
+    void shouldDeclinedByCheckboxWrungOut() {
         val validationPage = new ValidationPage();
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.openLink(getAuthInfo);
         val questionnairePage = new QuestionnairePage();
         questionnairePage.fillGeneratedValues();
-        questionnairePage.fill13QuestionAndEdit(minusYearsFromNow, dateFormatMonthYear);
+        questionnairePage.fillQuestion13(minusYearsFromNow, dateFormatMonthYear);
+        questionnairePage.fillQuestion14(minusYearsFromNow, dateFormatYear);
+        questionnairePage.fillQuestion17(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.randomRowDelete();
-        questionnairePage.fill14QuestionAndEdit(minusYearsFromNow, dateFormatYear);
-        questionnairePage.randomRowDelete();
+        questionnairePage.radioButtonRelativesInOurOrganization();
+        questionnairePage.radioButtonRelativesPermanentlyAbroad();
+        questionnairePage.uploadFile(attachJpg);
+        questionnairePage.submitClick();
+    }
+
+
+    @Test
+    void shouldEditOneValueEachTableQuestionAndSubmitForm() {
+        val validationPage = new ValidationPage();
+        val getAuthInfo = DataHelper.getFullNameInfo();
+        validationPage.openLink(getAuthInfo);
+        val questionnairePage = new QuestionnairePage();
+        questionnairePage.fillGeneratedValues();
         questionnairePage.fill17QuestionAndEdit(minusYearsFromNow, dateFormatMonthYear);
+        questionnairePage.fill14QuestionAndEdit(minusYearsFromNow, dateFormatYear);
+        questionnairePage.fill13QuestionAndEdit(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
         questionnairePage.uploadFile(attachJpg);

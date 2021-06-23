@@ -19,6 +19,7 @@ public abstract class BaseTest {
         Configuration.downloadsFolder = "C:\\Users\\Ruslan\\Desktop\\Java\\SecurityCheck";
         Configuration.savePageSource = false;
         Configuration.screenshots = false;
+        Configuration.startMaximized = true;
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
     }
