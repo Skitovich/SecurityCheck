@@ -10,8 +10,7 @@ import org.openqa.selenium.By;
 import java.io.File;
 import java.util.Random;
 
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.elements;
+import static com.codeborne.selenide.Selenide.*;
 import static com.nspkSecurityCheck.data.DataHelper.*;
 
 public class QuestionnairePage {
@@ -44,7 +43,8 @@ public class QuestionnairePage {
     private static final SelenideElement start = $x("//input[@id='timeStart']");
     private static final SelenideElement end = $x("//input[@id='timeEnd']");
     private static final SelenideElement insert = $x("//span[@aria-label='check']");
-    private static final SelenideElement edit = $x("//*[@data-icon='edit']");
+    private static final ElementsCollection editRowCollection = elements(By.xpath("//*[@data-icon='edit']"));
+    private static final SelenideElement editRow = $x("//*[@data-icon='edit']");
     private static final SelenideElement submit = $x("//button[@type='submit']");
     private static final ElementsCollection deleteButtonCollection = elements(By.xpath("//*[@data-icon='delete']"));
     private static final SelenideElement deleteConfirmQuestionOK = $x("//span[text()='OK']");
@@ -178,7 +178,7 @@ public class QuestionnairePage {
         positionAndOrganization.val(generateText(15, alphabet));
         organizationContacts.val(generateText(30, alphabet));
         insert.click();
-        edit.shouldBe(Condition.visible);
+        editRow.shouldBe(Condition.visible);
     }
 
     @Step("Заполнение 14 вопроса")
@@ -189,7 +189,7 @@ public class QuestionnairePage {
         relationDegree.val(generateText(10, alphabet));
         fullNameRelative.val(generateChangeFullName());
         insert.click();
-        edit.shouldBe(Condition.visible);
+        editRow.shouldBe(Condition.visible);
     }
 
     @Step("Заполнение 17 вопроса")
@@ -199,43 +199,25 @@ public class QuestionnairePage {
         fillEnd(minusYearsFromNow - 1, dateFormat);
         registrationAddress.val(generateContacts());
         insert.click();
-        edit.shouldBe(Condition.visible);
+        editRow.shouldBe(Condition.visible);
     }
 
-    @Step("Заполнение 17 вопроса, редактирование, сохранение")
-    public void fill17QuestionAndEdit(int minusYearsFromNow, String dateFormat) {
-        fillQuestion17(minusYearsFromNow, dateFormat);
-        edit.click();
-        fillDateStart(minusYearsFromNow, dateFormat);
-        fillEnd(minusYearsFromNow - 1, dateFormat);
-        registrationAddress.val(generateContacts());
-        insert.click();
-        edit.shouldBe(Condition.visible);
+    @Step("Рандомно редактирует строку в таблице")
+    public void editRandomRowAndFillsIt() {
+        Random random = new Random();
+        int size = editRowCollection.size();
+        int num = random.nextInt(size);
+
+        editRowCollection.get(num).click();
+        if(positionAndOrganization.isDisplayed())
+            fillQuestion13(3,"MM.yyyy");
+        else if (relationDegree.isDisplayed())
+            fillQuestion14(3,"yyyy");
+        else
+            fillQuestion17(3,"MM.yyyy");
     }
 
-    @Step("Заполнение 14 вопроса, редактирование, сохранение")
-    public void fill14QuestionAndEdit(int minusYearsFromNow, String dateFormat) {
-        fillQuestion14(minusYearsFromNow, dateFormat);
-        edit.click();
-        yearOfBirthRelative.click();
-        yearOfBirthRelative.val(generateDate(minusYearsFromNow, dateFormat));
-        relationDegree.val(generateText(10, alphabet));
-        fullNameRelative.val(generateChangeFullName());
-        insert.click();
-        edit.shouldBe(Condition.visible);
-    }
 
-    @Step("Заполнение 13 вопроса, редактирование, сохранение")
-    public void fill13QuestionAndEdit(int minusYearsFromNow, String dateFormat) {
-        fillQuestion13(minusYearsFromNow, dateFormat);
-        edit.click();
-        fillDateStart(minusYearsFromNow, dateFormat);
-        fillEnd(minusYearsFromNow - 1, dateFormat);
-        positionAndOrganization.val(generateText(15, alphabet));
-        organizationContacts.val(generateText(30, alphabet));
-        insert.click();
-        edit.shouldBe(Condition.visible);
-    }
 
     @Step("Заполнение 13 вопроса {maxRows} раз")
     public void fill13QuestionManyTimes(int minusYearsFromNow, String dateFormat) {

@@ -97,7 +97,6 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.fillQuestion13(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.fillQuestion14(minusYearsFromNow, dateFormatYear);
         questionnairePage.fillQuestion17(minusYearsFromNow, dateFormatMonthYear);
-        questionnairePage.randomRowDelete();
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
         questionnairePage.uploadFile(attachJpg);
@@ -106,37 +105,39 @@ public class QuestionnairePageTest extends BaseTest {
     }
 
     @Test
-    void shouldDeclinedByCheckboxWrungOut() {
+    void shouldFillOneRowAndEdit() {
         val validationPage = new ValidationPage();
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.openLink(getAuthInfo);
         val questionnairePage = new QuestionnairePage();
         questionnairePage.fillGeneratedValues();
         questionnairePage.fillQuestion13(minusYearsFromNow, dateFormatMonthYear);
+        questionnairePage.editRandomRowAndFillsIt();
         questionnairePage.fillQuestion14(minusYearsFromNow, dateFormatYear);
+        questionnairePage.editRandomRowAndFillsIt();
         questionnairePage.fillQuestion17(minusYearsFromNow, dateFormatMonthYear);
-        questionnairePage.randomRowDelete();
+        questionnairePage.editRandomRowAndFillsIt();
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
         questionnairePage.uploadFile(attachJpg);
+        questionnairePage.checkboxClick();
         questionnairePage.submitClick();
     }
 
 
     @Test
-    void shouldEditOneValueEachTableQuestionAndSubmitForm() {
+    void shouldDeclinedByCheckboxUnpressed() {
         val validationPage = new ValidationPage();
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.openLink(getAuthInfo);
         val questionnairePage = new QuestionnairePage();
         questionnairePage.fillGeneratedValues();
-        questionnairePage.fill17QuestionAndEdit(minusYearsFromNow, dateFormatMonthYear);
-        questionnairePage.fill14QuestionAndEdit(minusYearsFromNow, dateFormatYear);
-        questionnairePage.fill13QuestionAndEdit(minusYearsFromNow, dateFormatMonthYear);
+        questionnairePage.fillQuestion17(minusYearsFromNow, dateFormatMonthYear);
+        questionnairePage.fillQuestion14(minusYearsFromNow, dateFormatYear);
+        questionnairePage.fillQuestion13(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
         questionnairePage.uploadFile(attachJpg);
-        questionnairePage.checkboxClick();
         questionnairePage.submitClick();
     }
 
