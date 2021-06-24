@@ -151,16 +151,9 @@ public class QuestionnairePageTest extends BaseTest {
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.openLink(getAuthInfo);
         val questionnairePage = new QuestionnairePage();
-        questionnairePage.fillGeneratedValues();
-        questionnairePage.fillQuestion13(minusYearsFromNow, dateFormatMonthYear);
-        questionnairePage.fillQuestion14(minusYearsFromNow, dateFormatYear);
-        questionnairePage.fillQuestion17(minusYearsFromNow, dateFormatMonthYear);
-        questionnairePage.radioButtonRelativesInOurOrganization();
-        questionnairePage.radioButtonRelativesPermanentlyAbroad();
         questionnairePage.uploadAllExtensions(new ArrayList<>(
                 Arrays.asList(attachDocx,attachPng,attachJpg,attachXlsx,attachPdf)));
-        questionnairePage.checkboxClick();
-        questionnairePage.submitClick();
+
     }
 
     @Test
