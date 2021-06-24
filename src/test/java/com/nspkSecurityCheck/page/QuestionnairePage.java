@@ -8,6 +8,8 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -135,21 +137,11 @@ public class QuestionnairePage {
     }
 
     @Step("Загружает несколько вложений и проверяет что они отображаются")
-    public void uploadAllExtensions(String attachPdf,
-                                    String attachJpg,
-                                    String attachDocx,
-                                    String attachPng,
-                                    String attachXlsx) {
-        buttonFileUpload.uploadFile(new File("src/test/resources/Attachments." + attachPdf));
-        buttonFileUpload.uploadFile(new File("src/test/resources/Attachments." + attachDocx));
-        buttonFileUpload.uploadFile(new File("src/test/resources/Attachments." + attachJpg));
-        buttonFileUpload.uploadFile(new File("src/test/resources/Attachments." + attachPng));
-        buttonFileUpload.uploadFile(new File("src/test/resources/Attachments." + attachXlsx));
-        checkAttachmentExtension(attachPdf);
-        checkAttachmentExtension(attachXlsx);
-        checkAttachmentExtension(attachJpg);
-        checkAttachmentExtension(attachPng);
-        checkAttachmentExtension(attachXlsx);
+    public void uploadAllExtensions(ArrayList<String> list) {
+        for(String attachType: list) {
+            buttonFileUpload.uploadFile(new File("src/test/resources/Attachments." + attachType));
+            checkAttachmentExtension(attachType);
+        }
     }
 
     @Step("Клик по чекбоксу")

@@ -8,6 +8,10 @@ import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static com.codeborne.selenide.Selenide.*;
 
 
@@ -153,7 +157,8 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.fillQuestion17(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
-        questionnairePage.uploadAllExtensions(attachPdf, attachJpg, attachDocx, attachPng, attachXlsx);
+        questionnairePage.uploadAllExtensions(new ArrayList<>(
+                Arrays.asList(attachDocx,attachPng,attachJpg,attachXlsx,attachPdf)));
         questionnairePage.checkboxClick();
         questionnairePage.submitClick();
     }
@@ -170,7 +175,8 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.fillQuestion17(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
-        questionnairePage.uploadFile(attachJpg);
+        questionnairePage.uploadAllExtensions(new ArrayList<>(
+                Arrays.asList(attachDocx,attachPng,attachJpg,attachXlsx,attachPdf)));
         questionnairePage.checkboxClick();
         sleep(linkLifetime);
         questionnairePage.submitClickByDeadLink();
