@@ -8,7 +8,7 @@ import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -151,9 +151,7 @@ public class QuestionnairePageTest extends BaseTest {
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.openLink(getAuthInfo);
         val questionnairePage = new QuestionnairePage();
-        questionnairePage.uploadAllExtensions(new ArrayList<>(
-                Arrays.asList(attachDocx,attachPng,attachJpg,attachXlsx,attachPdf)));
-
+        questionnairePage.uploadAllExtensions(attachDocx, attachPng, attachJpg, attachXlsx, attachPdf);
     }
 
     @Test
@@ -168,8 +166,7 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.fillQuestion17(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
-        questionnairePage.uploadAllExtensions(new ArrayList<>(
-                Arrays.asList(attachDocx,attachPng,attachJpg,attachXlsx,attachPdf)));
+        questionnairePage.uploadAllExtensions(attachDocx, attachPng, attachJpg, attachXlsx, attachPdf);
         questionnairePage.checkboxClick();
         sleep(linkLifetime);
         questionnairePage.submitClickByDeadLink();

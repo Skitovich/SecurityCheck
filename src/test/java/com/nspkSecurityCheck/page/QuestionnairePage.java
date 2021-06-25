@@ -8,8 +8,6 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -137,8 +135,8 @@ public class QuestionnairePage {
     }
 
     @Step("Загружает несколько вложений и проверяет что они отображаются")
-    public void uploadAllExtensions(ArrayList<String> list) {
-        for(String attachType: list) {
+    public void uploadAllExtensions(String... extensions) {
+        for (String attachType : extensions) {
             buttonFileUpload.uploadFile(new File("src/test/resources/Attachments." + attachType));
             checkAttachmentExtension(attachType);
         }
@@ -201,14 +199,13 @@ public class QuestionnairePage {
         int num = random.nextInt(size);
 
         editRowCollection.get(num).click();
-        if(positionAndOrganization.isDisplayed())
-            fillQuestion13(3,"MM.yyyy");
+        if (positionAndOrganization.isDisplayed())
+            fillQuestion13(3, "MM.yyyy");
         else if (relationDegree.isDisplayed())
-            fillQuestion14(3,"yyyy");
+            fillQuestion14(3, "yyyy");
         else
-            fillQuestion17(3,"MM.yyyy");
+            fillQuestion17(3, "MM.yyyy");
     }
-
 
 
     @Step("Заполнение 13 вопроса {maxRows} раз")
