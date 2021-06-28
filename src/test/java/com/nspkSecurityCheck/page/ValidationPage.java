@@ -19,7 +19,6 @@ public class ValidationPage {
     private static final SelenideElement linkForCandidate = $x("//div[contains(text(),'http')]");
     private static final SelenideElement popupCopyClipBoard = $x("//span[text()='Ссылка скопирована']");
     private static final SelenideElement openExpiredLink = $x("//div[text()='Данная ссылка некорректна или неактуальна']");
-    private String alphabet = "АаБбВвГгДдЕеЁёЖжЗзИиКкЛлМмНнОоПпРрСсТУуФфЦцЮюЯяЭэХх-";
 
 
     public ValidationPage() {
@@ -56,6 +55,7 @@ public class ValidationPage {
 
     @Step("Заполняет поле 2000 символов")
     public void fillForm2000chars() {
+        String alphabet = "АаБбВвГгДдЕеЁёЖжЗзИиКкЛлМмНнОоПпРрСсТУуФфЦцЮюЯяЭэХх-";
         userFirstName.val(DataHelper.generateText(2000, alphabet));
         userLastName.val(DataHelper.generateText(2000, alphabet));
         userPatronymic.val(DataHelper.generateText(2000, alphabet));

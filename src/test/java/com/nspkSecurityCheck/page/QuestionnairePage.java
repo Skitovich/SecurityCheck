@@ -59,7 +59,7 @@ public class QuestionnairePage {
             $x("//span[contains(@class,'ant-checkbox-checked')]");
     private static final SelenideElement declinedLinkIsDeath =
             $x("//span[text()='Данная ссылка некорректна или неактуальна']");
-    private final String alphabet = "АаБбВвГгДдЕеЁёЖжЗзИиКкЛлМмНн ОоПпРрСсТУуФфЦцЮюЯяЭэХх    ";
+    private final String alphabet = "АаБбВвГгДдЕеЁёЖжЗзИиКкЛлМмНн ОоПпРрСсТУуФфЦцЮюЯяЭэХх   ";
 
 
     public QuestionnairePage() {
@@ -85,7 +85,7 @@ public class QuestionnairePage {
         hobbies.val(DataHelper.generateText(20, alphabet));
     }
 
-    @Step("Генерация 2000 символов для всех текстовых полей")
+    @Step("Генерирует 2000 символов для каждого текстового поля")
     public void fillGeneratedValues2000char() {
         int howManyLetters = 2000;
         changeFullName.val(generateText(howManyLetters, alphabet));
@@ -129,7 +129,7 @@ public class QuestionnairePage {
         checkAttachmentExtension(extension);
     }
 
-    @Step("Проверяет по расширению загруженный файл")
+    @Step("Проверяет загруженные файлы, что они отображаются")
     public void checkAttachmentExtension(String extension) {
         $x("//span[contains(text(),'" + extension + "')]").shouldBe(Condition.visible);
     }
