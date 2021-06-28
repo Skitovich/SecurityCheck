@@ -1,0 +1,94 @@
+Запуск приложения проиводится путём запуска с использованием Docker-compose. Для этого необходимо:
+1. Все сервисы (hr-anketa, hr-linker, nspk-mailservice, nspk-linkservice) разместить в одной директории;
+2. В той же директории разместить файлы docker-compose.yml и .env;
+3. В файле .env прописать значения переменных (описание всех переменных ниже по тексту);
+4. В этой же директории выполнить команду "docker-compose up --build" (предварительно в системе должен быть установлен docker и docker-compose)
+
+В корне директории в процессе работы будет создана директория "files", в которой будут размещаться pdf и docx файлы,
+а также в директории "files" директория "upload", где будут размещены загружаемые кандидатами файлы.
+
+В корне директории будут созданы файлы app.log с логами приложения и events.log с записями журналирования.
+
+
+ОПИСАНИЕ ПЕРЕМЕННЫХ ОКРУЖЕНИЯ
+
+REACT_APP_LINKER_URL:
+URL бэкенда сервиса генерации и валидации ссылок
+Пример: http://localhost:8282/api/v1
+
+REACT_APP_MAILER_URL:
+URL бэкенда сервиса отправки почты
+Пример: http://localhost:8181/api/v1
+
+SERVICE_URL:
+URL фронтенда сервиса заполнения анкеты кандидатом (будет в сгенерированной ссылке)
+Пример: http://localhost:5001
+
+JWT_TTL:
+Врмемя жизни токена в секундах
+Пример: 86400
+
+JWT_SECRET:
+Секретный ключ для шифрования токена
+Пример: p_BfR9aEtZrglj7bMofgkKr7zgHKxKxa1H27j-rTpquNX3Lze0UOlNEW6NN3
+
+PERMITTED_MIME_TYPES:
+Доступные типы файлов для загрузки кандидатом в виде Internet Media Types, разделённых запятыми
+Пример: image/png,application/pdf
+https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_MIME-%D1%82%D0%B8%D0%BF%D0%BE%D0%B2
+
+MAIL_TO_ADDRESSES:
+Список почтовых адресов, куда будут отправляться анкеты кандидатов, разделённых точкой с запятой
+Пример: i.ivanov@mail.ru;p.petrov@gmail.com
+
+MAIL_SERVICE_HOST:
+Хост почтового сервиса
+Пример: smtp.mailgun.org
+
+MAIL_SERVICE_PORT:
+Порт почтового сервиса
+Пример: 587
+
+MAIL_SERVICE_USERNAME:
+Имя пользователя почтового сервиса
+Пример: abc@hotmail.com
+
+MAIL_SERVICE_PASSWORD:
+Порт пользователя почтового сервиса
+Пример: g0fda6fed4ba1ef6c3dud0625d2e098q-e39cc42r-68c39c0b
+
+MAIL_SERVICE_PROTOCOL:
+Протокол почтового сервиса
+Пример: smtp
+
+MAIL_SMTP_AUTH:
+Использование smtp аутентификации (boolean)
+Пример: true
+
+MAIL_SMTP_STARTTLS_ENABLE:
+Использование STARTTLS (boolean)
+Пример: false
+
+
+MAIL_DEBUG:
+Отладка почтового сервиса (boolean)
+Пример: true
+
+JDBC_URL:
+URL подключения к базе данных с помощью синхронного драйвера
+Пример: jdbc:postgresql://postgres-nspk:5432/nspk
+
+R2DBC_URL:
+URL подключения к базе данных с помощью асинхронного драйвера
+Пример: r2dbc:postgresql://postgres-nspk:5432/nspk
+
+POSTGRES_USERNAME:
+Имя пользователя базы данных
+Пример: postgres
+
+POSTGRES_PASSWORD:
+Пароль пользователя базы данных
+Пример: postgres
+
+POSTGRES_DB:
+Имя БД, должно совпадать с именем БД в JDBC_URL и R2DBC_URL
