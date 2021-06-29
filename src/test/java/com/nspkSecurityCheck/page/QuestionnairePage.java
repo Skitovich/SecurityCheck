@@ -192,7 +192,7 @@ public class QuestionnairePage {
         editRow.shouldBe(Condition.visible);
     }
 
-    @Step("Рандомно редактирует строку в таблице")
+    @Step("Случайным образом редактирует строку в таблице")
     public void editRandomRowAndFillsIt() {
         Random random = new Random();
         int size = editRowCollection.size();
@@ -210,7 +210,7 @@ public class QuestionnairePage {
 
     @Step("Заполнение 13 вопроса {maxRows} раз")
     public void fill13QuestionManyTimes(int minusYearsFromNow, String dateFormat) {
-        int maxRows = 5;
+        int maxRows = 10;
         while (maxRows >= 0) {
             fillQuestion13(minusYearsFromNow + maxRows, dateFormat);
             maxRows--;
@@ -219,7 +219,7 @@ public class QuestionnairePage {
 
     @Step("Заполнение 14 вопроса {maxRows} раз")
     public void fill14QuestionManyTimes(int minusYearsFromNow, String dateFormat) {
-        int maxRows = 5;
+        int maxRows = 10;
         while (maxRows >= 0) {
             fillQuestion14(minusYearsFromNow + maxRows, dateFormat);
             maxRows--;
@@ -228,7 +228,7 @@ public class QuestionnairePage {
 
     @Step("Заполнение 17 вопроса {maxRows} раз")
     public void fill17QuestionManyTimes(int minusYearsFromNow, String dateFormat) {
-        int maxRows = 5;
+        int maxRows = 10;
         while (maxRows >= 0) {
             fillQuestion17(minusYearsFromNow + maxRows, dateFormat);
             maxRows--;
@@ -250,7 +250,7 @@ public class QuestionnairePage {
     }
 
 
-    @Step("Удаляет случаную строку из таблицы и проверяет количество строк")
+    @Step("Удаляет случайную строку из таблицы и проверяет количество строк")
     public void randomRowDelete() {
         Random random = new Random();
         int size = deleteButtonCollection.size();

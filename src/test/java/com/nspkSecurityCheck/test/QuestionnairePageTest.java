@@ -30,7 +30,7 @@ public class QuestionnairePageTest extends BaseTest {
     }
 
     @Test
-    void shouldEnterToMail() {
+    void shouldEnterToMailByHeader() {
         val validationPage = new ValidationPage();
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.openLink(getAuthInfo);
@@ -69,7 +69,7 @@ public class QuestionnairePageTest extends BaseTest {
 
 
     @Test
-    void shouldSuccessfullyPassedFiveValuesEveryTableQuestion() {
+    void shouldSuccessfullyPassedTenValuesEveryTableQuestion() {
         val validationPage = new ValidationPage();
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.openLink(getAuthInfo);
@@ -122,23 +122,6 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
         questionnairePage.uploadFile(attachJpg);
         questionnairePage.checkboxClick();
-        questionnairePage.submitClick();
-    }
-
-
-    @Test
-    void shouldDeclinedByCheckboxUnpressed() {
-        val validationPage = new ValidationPage();
-        val getAuthInfo = DataHelper.getFullNameInfo();
-        validationPage.openLink(getAuthInfo);
-        val questionnairePage = new QuestionnairePage();
-        questionnairePage.fillGeneratedValues();
-        questionnairePage.fillQuestion17(minusYearsFromNow, dateFormatMonthYear);
-        questionnairePage.fillQuestion14(minusYearsFromNow, dateFormatYear);
-        questionnairePage.fillQuestion13(minusYearsFromNow, dateFormatMonthYear);
-        questionnairePage.radioButtonRelativesInOurOrganization();
-        questionnairePage.radioButtonRelativesPermanentlyAbroad();
-        questionnairePage.uploadFile(attachJpg);
         questionnairePage.submitClick();
     }
 

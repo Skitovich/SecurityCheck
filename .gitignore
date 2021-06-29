@@ -40,7 +40,7 @@ out/
 *.tar.gz
 *.rar
 /.idea/
-/src/test/resources/
+
 /nspk/
 /nspk/
-/src/main/resources/
+
