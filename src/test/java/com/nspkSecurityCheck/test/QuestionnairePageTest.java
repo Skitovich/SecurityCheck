@@ -75,10 +75,6 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.fill13QuestionManyTimes(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.fill14QuestionManyTimes(minusYearsFromNow, dateFormatYear);
         questionnairePage.fill17QuestionManyTimes(minusYearsFromNow, dateFormatMonthYear);
-//        questionnairePage.radioButtonRelativesInOurOrganization();
-//        questionnairePage.radioButtonRelativesPermanentlyAbroad();
-//        questionnairePage.checkboxClick();
-//        questionnairePage.submitClick();
     }
 
     @Test
