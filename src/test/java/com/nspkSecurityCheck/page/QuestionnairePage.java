@@ -94,7 +94,7 @@ public class QuestionnairePage {
     }
 
     @Step
-    public void fillFieldAndCheckNumberOfCharsForNumbers(SelenideElement element,String alphabet) {
+    public void fillFieldAndCheckNumberOfCharsForNumbers(SelenideElement element, String alphabet) {
         int length = 2000;
         String value = generateText(length, alphabet);
         element.val(value);
@@ -107,7 +107,7 @@ public class QuestionnairePage {
         fillFieldAndCheckNumberOfChars(birthData);
         fillFieldAndCheckNumberOfChars(passportData);
         fillFieldAndCheckNumberOfChars(contacts);
-        fillFieldAndCheckNumberOfCharsForNumbers(taxpayerIdentificationNumber,"0123456789");
+        fillFieldAndCheckNumberOfCharsForNumbers(taxpayerIdentificationNumber, "0123456789");
         fillFieldAndCheckNumberOfChars(weaponPermission);
         fillFieldAndCheckNumberOfChars(maritalStatus);
         fillFieldAndCheckNumberOfChars(citizenship);

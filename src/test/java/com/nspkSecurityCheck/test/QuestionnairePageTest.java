@@ -75,10 +75,10 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.fill13QuestionManyTimes(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.fill14QuestionManyTimes(minusYearsFromNow, dateFormatYear);
         questionnairePage.fill17QuestionManyTimes(minusYearsFromNow, dateFormatMonthYear);
-        questionnairePage.radioButtonRelativesInOurOrganization();
-        questionnairePage.radioButtonRelativesPermanentlyAbroad();
-        questionnairePage.checkboxClick();
-        questionnairePage.submitClick();
+//        questionnairePage.radioButtonRelativesInOurOrganization();
+//        questionnairePage.radioButtonRelativesPermanentlyAbroad();
+//        questionnairePage.checkboxClick();
+//        questionnairePage.submitClick();
     }
 
     @Test
@@ -99,6 +99,21 @@ public class QuestionnairePageTest extends BaseTest {
     }
 
     @Test
+    void shouldAddOneValueEachTableQuestionAndDelete() {
+        val validationPage = new ValidationPage();
+        val getAuthInfo = DataHelper.getFullNameInfo();
+        validationPage.openLink(getAuthInfo);
+        val questionnairePage = new QuestionnairePage();
+        questionnairePage.fillGeneratedValues();
+        questionnairePage.fillQuestion13(minusYearsFromNow, dateFormatMonthYear);
+        questionnairePage.fillQuestion14(minusYearsFromNow, dateFormatYear);
+        questionnairePage.fillQuestion17(minusYearsFromNow, dateFormatMonthYear);
+        questionnairePage.randomRowDelete();
+        questionnairePage.randomRowDelete();
+        questionnairePage.randomRowDelete();
+    }
+
+    @Test
     void shouldFillOneRowAndEdit() {
         val validationPage = new ValidationPage();
         val getAuthInfo = DataHelper.getFullNameInfo();
@@ -111,11 +126,6 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.editRandomRowAndFillsIt();
         questionnairePage.fillQuestion17(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.editRandomRowAndFillsIt();
-        questionnairePage.radioButtonRelativesInOurOrganization();
-        questionnairePage.radioButtonRelativesPermanentlyAbroad();
-        questionnairePage.uploadFile(attachJpg);
-        questionnairePage.checkboxClick();
-        questionnairePage.submitClick();
     }
 
     @Test
