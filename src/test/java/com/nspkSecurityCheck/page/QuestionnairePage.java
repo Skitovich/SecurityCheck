@@ -85,23 +85,39 @@ public class QuestionnairePage {
         hobbies.val(DataHelper.generateText(20, alphabet));
     }
 
-    @Step("Генерирует 2000 символов для каждого текстового поля")
-    public void fillGeneratedValues2000char() {
-        int howManyLetters = 2000;
-        changeFullName.val(generateText(howManyLetters, alphabet));
-        birthData.val(generateText(howManyLetters, alphabet));
-        passportData.val(generateText(howManyLetters, alphabet));
-        taxpayerIdentificationNumber.val(generateText(howManyLetters, "0123456789"));
-        contacts.val(generateText(howManyLetters, alphabet));
-        weaponPermission.val(generateText(howManyLetters, alphabet));
-        maritalStatus.val(generateText(howManyLetters, alphabet));
-        citizenship.val(generateText(howManyLetters, alphabet));
-        education.val(generateText(howManyLetters, alphabet));
-        residencePermitRequest.val(generateText(howManyLetters, alphabet));
-        travelStatus.val(generateText(howManyLetters, alphabet));
-        militaryStatus.val(generateText(howManyLetters, alphabet));
-        financialLiabilities.val(generateText(howManyLetters, alphabet));
-        hobbies.val(generateText(howManyLetters, alphabet));
+    @Step
+    public void fillFieldAndCheckNumberOfChars(SelenideElement element) {
+        int length = 2000;
+        String value = generateText(length, alphabet);
+        element.val(value);
+        element.shouldHave(Condition.text(value));
+    }
+
+    @Step
+    public void fillFieldAndCheckNumberOfCharsForNumbers(SelenideElement element,String alphabet) {
+        int length = 2000;
+        String value = generateText(length, alphabet);
+        element.val(value);
+        element.shouldHave(Condition.value(value));
+    }
+
+    @Step("Генерирует 2000 символов для каждого текстового поля и проверяет количество символов")
+    public void fillGeneratedValues2000charAndCheckNumOfChar() {
+        fillFieldAndCheckNumberOfChars(changeFullName);
+        fillFieldAndCheckNumberOfChars(birthData);
+        fillFieldAndCheckNumberOfChars(passportData);
+        fillFieldAndCheckNumberOfChars(contacts);
+        fillFieldAndCheckNumberOfCharsForNumbers(taxpayerIdentificationNumber,"0123456789");
+        fillFieldAndCheckNumberOfChars(weaponPermission);
+        fillFieldAndCheckNumberOfChars(maritalStatus);
+        fillFieldAndCheckNumberOfChars(citizenship);
+        fillFieldAndCheckNumberOfChars(education);
+        fillFieldAndCheckNumberOfChars(residencePermitRequest);
+        fillFieldAndCheckNumberOfChars(travelStatus);
+        fillFieldAndCheckNumberOfChars(militaryStatus);
+        fillFieldAndCheckNumberOfChars(financialLiabilities);
+        fillFieldAndCheckNumberOfChars(hobbies);
+
     }
 
 
@@ -142,7 +158,7 @@ public class QuestionnairePage {
         }
     }
 
-    @Step("Клик по чекбоксу")
+    @Step("Клик по чек-боксу")
     public void checkboxClick() {
         checkbox.click();
     }
@@ -210,7 +226,7 @@ public class QuestionnairePage {
 
     @Step("Заполнение 13 вопроса {maxRows} раз")
     public void fill13QuestionManyTimes(int minusYearsFromNow, String dateFormat) {
-        int maxRows = 10;
+        int maxRows = 11;
         while (maxRows >= 0) {
             fillQuestion13(minusYearsFromNow + maxRows, dateFormat);
             maxRows--;

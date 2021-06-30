@@ -56,13 +56,10 @@ public class QuestionnairePageTest extends BaseTest {
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.openLink(getAuthInfo);
         val questionnairePage = new QuestionnairePage();
-        questionnairePage.fillGeneratedValues2000char();
-        questionnairePage.fillQuestion13(minusYearsFromNow, dateFormatMonthYear);
-        questionnairePage.fillQuestion14(minusYearsFromNow, dateFormatYear);
+        questionnairePage.fillGeneratedValues2000charAndCheckNumOfChar();
         questionnairePage.fillQuestion17(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
-        questionnairePage.uploadFile(attachJpg);
         questionnairePage.checkboxClick();
         questionnairePage.submitClick();
     }
@@ -78,12 +75,8 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.fill13QuestionManyTimes(minusYearsFromNow, dateFormatMonthYear);
         questionnairePage.fill14QuestionManyTimes(minusYearsFromNow, dateFormatYear);
         questionnairePage.fill17QuestionManyTimes(minusYearsFromNow, dateFormatMonthYear);
-        questionnairePage.randomRowDelete();
-        questionnairePage.randomRowDelete();
-        questionnairePage.randomRowDelete();
         questionnairePage.radioButtonRelativesInOurOrganization();
         questionnairePage.radioButtonRelativesPermanentlyAbroad();
-        questionnairePage.uploadFile(attachJpg);
         questionnairePage.checkboxClick();
         questionnairePage.submitClick();
     }
@@ -126,7 +119,7 @@ public class QuestionnairePageTest extends BaseTest {
     }
 
     @Test
-    void shouldAddAllExtensionsAndSubmitForm() {
+    void shouldAddAllExtensions() {
         val validationPage = new ValidationPage();
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.openLink(getAuthInfo);

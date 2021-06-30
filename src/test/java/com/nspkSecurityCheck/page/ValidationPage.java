@@ -31,7 +31,7 @@ public class ValidationPage {
         open(link);
     }
 
-    @Step("Заполняет поле сгеренрированными данными и генерирует ссылку")
+    @Step("Заполняет поле сгенерированными данными и генерирует ссылку")
     public void fillFormAndGenerateLink(DataHelper.FullName fullName) {
         fullName.generateFullName();
         userFirstName.val(DataHelper.FullName.getFirstname());

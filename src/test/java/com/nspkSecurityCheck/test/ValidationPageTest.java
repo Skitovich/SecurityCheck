@@ -18,7 +18,7 @@ public class ValidationPageTest extends BaseTest {
     }
 
     @Test
-    void shouldGenerateLinkTest() {
+    void fillFieldsWithValidDataAndGenerateLink() {
         val validationPage = new ValidationPage();
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.fillFormAndGenerateLink(getAuthInfo);

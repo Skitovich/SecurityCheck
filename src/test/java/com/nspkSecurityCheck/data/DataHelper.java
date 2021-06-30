@@ -16,7 +16,7 @@ public class DataHelper {
         return new FullName();
     }
 
-    // Методы и поля для страницы валидации
+    //------------------------------ Методы для страницы валидации-------------------------------------
     private static String generateCandidateLastName() {
         return new Faker(new Locale("ru_RU")).name().lastName();
     }
@@ -41,11 +41,10 @@ public class DataHelper {
             char c = alphabet.charAt(random);
             sb.append(c);
         }
-
         return sb.toString();
     }
 
-    // Методы для анкеты
+//    -------------------------------- Методы для анкеты*/----------------------------------------------
 
     public static String generateChangeFullName() {
         return new Faker(new Locale("ru")).name().nameWithMiddle();
@@ -88,7 +87,7 @@ public class DataHelper {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
         return dayDeliveryCard.format(formatter);
     }
-
+//------------------------------------------Поля и конструкторы-------------------------------------------
     public static class FullName {
         private static String firstname;
         private static String lastname;
