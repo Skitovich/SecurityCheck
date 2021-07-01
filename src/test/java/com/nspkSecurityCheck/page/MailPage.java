@@ -25,8 +25,9 @@ public class MailPage {
     }
 
     @Step("Логиниться если видит стартовую страницу, если не видит сразу обновляет почтовый ящик и ищет письмо по ФИО")
-    public void checkLoginMailAndCheckAttach(String filename) {
+    public void checkLoginMailAndCheckAttach() {
         while (enterMail.is(Condition.visible)) {
+            sleep(10000);
             loginYandexMail();
         }
         refreshInbox();
@@ -35,7 +36,7 @@ public class MailPage {
 
     @Step("Нажать кнопку обновить")
     private void refreshInbox() {
-        sleep(25000);
+        sleep(20000);
         refresh.shouldBe(Condition.visible).click();
     }
 

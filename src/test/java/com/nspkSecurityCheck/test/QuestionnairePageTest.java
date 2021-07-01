@@ -51,7 +51,7 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.checkboxClick();
         questionnairePage.submitClick();
         mailPage.goToYandexMail();
-        mailPage.checkLoginMailAndCheckAttach(attachJpg);
+        mailPage.checkLoginMailAndCheckAttach();
         mailPage.checkAttachments(attachJpg);
     }
 
@@ -226,7 +226,7 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.checkboxClick();
         questionnairePage.submitClick();
         mailPage.goToYandexMail();
-        mailPage.checkLoginMailAndCheckAttach(attachJpg);
+        mailPage.checkLoginMailAndCheckAttach();
         mailPage.checkAttachments(attachJpg);
     }
 }
