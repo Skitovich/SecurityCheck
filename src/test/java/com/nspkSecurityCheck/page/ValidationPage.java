@@ -13,12 +13,13 @@ public class ValidationPage {
     private static final SelenideElement userLastName = $x("//input[@id='userInfo_lastName']");
     private static final SelenideElement userFirstName = $x("//input[@id='userInfo_firstName']");
     private static final SelenideElement userPatronymic = $x("//input[@id='userInfo_patronymic']");
-    private static final SelenideElement buttonGenerateLink = $x("//button[contains(@class,'generateBtn')]");
+    private static final SelenideElement buttonGenerateLink =
+            $x("//button[contains(@class,'generateBtn')]");
     private static final SelenideElement buttonCopyToClipboard = $x("//button[contains(@class,'copyBtn')]");
-    private static final SelenideElement buttonClearForm = $x("//button[contains(@class,'clearBtn')]");
     private static final SelenideElement linkForCandidate = $x("//div[contains(text(),'http')]");
     private static final SelenideElement popupCopyClipBoard = $x("//span[text()='Ссылка скопирована']");
-    private static final SelenideElement openExpiredLink = $x("//div[text()='Данная ссылка некорректна или неактуальна']");
+    private static final SelenideElement openExpiredLink =
+            $x("//div[text()='Данная ссылка некорректна или неактуальна']");
 
 
     public ValidationPage() {
