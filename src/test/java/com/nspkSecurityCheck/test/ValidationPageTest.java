@@ -16,14 +16,16 @@ public class ValidationPageTest extends BaseTest {
     void openHomePage() {
         open("");
     }
-// Генерирование ссылки и отображение ее в поле "Ссылка для кандидата"
+
+    // Генерирование ссылки и отображение ее в поле "Ссылка для кандидата"
     @Test
     void fillFieldsWithValidDataAndGenerateLinkTest() {
         val validationPage = new ValidationPage();
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.fillFormAndGenerateLink(getAuthInfo);
     }
-// При нажатии на кнопку "Копировать в буфер обмена" ссылка копируется в буфер обмена
+
+    // При нажатии на кнопку "Копировать в буфер обмена" ссылка копируется в буфер обмена
     @Test
     void shouldGenerateLinkTestCopyClipboardTest() {
         val validationPage = new ValidationPage();
@@ -31,16 +33,18 @@ public class ValidationPageTest extends BaseTest {
         validationPage.fillFormAndGenerateLink(getAuthInfo);
         validationPage.copyClipBoard();
     }
-// Проверить длину полей - максимально по 2000 символов в каждом
+
+    // Проверить длину полей - максимально по 2000 символов в каждом
     @Test
     void shouldGenerateLinkWih2000charsTest() {
         val validationPage = new ValidationPage();
         validationPage.fillForm2000chars();
 
     }
-/* Проверить, что при попытке пользователем открыть просроченную ссылку,
-1)  осуществляется проверка на ее актуальность (время жизни (ttl) сгенерированного UUID).
-2) кандидат не может открыть анкету, и получает соответствующее оповещение о том, что ссылка невалидна */
+
+    /* Проверить, что при попытке пользователем открыть просроченную ссылку,
+    1)  осуществляется проверка на ее актуальность (время жизни (ttl) сгенерированного UUID).
+    2) кандидат не может открыть анкету, и получает соответствующее оповещение о том, что ссылка невалидна */
     @Test
     void shouldGenerateLinkOpenExpiredLinkTest() {
         val validationPage = new ValidationPage();

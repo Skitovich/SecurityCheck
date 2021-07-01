@@ -1,5 +1,6 @@
 package com.nspkSecurityCheck.page;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -48,6 +49,8 @@ public class QuestionnairePage {
     private static final SelenideElement editRow = $x("//*[@data-icon='edit']");
     private static final SelenideElement submit = $x("//button[@type='submit']");
     private static final ElementsCollection deleteButtonCollection = elements(By.xpath("//*[@data-icon='delete']"));
+    private static final ElementsCollection paginationButtonCollection =
+            elements(By.xpath("//button[@class='ant-pagination-item-link']"));
     private static final SelenideElement deleteConfirmQuestionOK = $x("//span[text()='OK']");
     private static final SelenideElement deleteConfirmQuestion =
             $x("//div[text()='Вы уверены, что хотите удалить запись?']");
@@ -243,13 +246,15 @@ public class QuestionnairePage {
         }
     }
 
-    @Step("Заполнение 17 вопроса {maxRows} раз")
+    @Step("Заполнение 17 вопроса {maxRows} раз, проверка что пагинация добавилась " +
+            "для всех таблиц(размер коллекции кнопок пагинации 6 шт.)")
     public void fill17QuestionManyTimes(int minusYearsFromNow, String dateFormat) {
         int maxRows = 10;
         while (maxRows >= 0) {
             fillQuestion17(minusYearsFromNow + maxRows, dateFormat);
             maxRows--;
         }
+        paginationButtonCollection.shouldHave(CollectionCondition.size(6));
     }
 
     @Step("Отправить анкету на почту, проверка об успешности и проверка что нажат чекбокс")

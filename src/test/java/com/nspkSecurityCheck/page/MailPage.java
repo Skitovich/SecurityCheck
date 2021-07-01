@@ -24,14 +24,13 @@ public class MailPage {
         open("https://mail.yandex.ru/?from=header-360&uid=1130000048345014#inbox");
     }
 
-    @Step("Логинится если видит стартовую страницу, если не видит сразу обновляет почтовый ящик и ищет письмо")
+    @Step("Логиниться если видит стартовую страницу, если не видит сразу обновляет почтовый ящик и ищет письмо по ФИО")
     public void checkLoginMailAndCheckAttach(String filename) {
-        if (enterMail.is(Condition.visible)) {
+        while (enterMail.is(Condition.visible)) {
             loginYandexMail();
         }
         refreshInbox();
         openMailByTitle();
-        checkAttachments(filename);
     }
 
     @Step("Нажать кнопку обновить")
@@ -58,7 +57,7 @@ public class MailPage {
     }
 
     @Step("Проверка вложений")
-    private void checkAttachments(String fileName) {
+    public void checkAttachments(String fileName) {
         $x("//div[contains(text()," +
                 "'" + DataHelper.FullName.getPatronymic() + " " + DataHelper.FullName.getLastname() + "')]")
                 .shouldBe(Condition.visible);
