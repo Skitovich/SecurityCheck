@@ -30,7 +30,7 @@ public class QuestionnairePageTest extends BaseTest {
     }
 
     @Test
-    void shouldEnterToMailByHeader() {
+    void shouldEnterToMailByHeaderTest() {
         val validationPage = new ValidationPage();
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.openLink(getAuthInfo);
@@ -51,7 +51,7 @@ public class QuestionnairePageTest extends BaseTest {
 
 
     @Test
-    void shouldSuccessfullyPassedValueEveryTextField2000char() {
+    void shouldSuccessfullyPassedValueEveryTextField2000charTest() {
         val validationPage = new ValidationPage();
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.openLink(getAuthInfo);
@@ -66,7 +66,7 @@ public class QuestionnairePageTest extends BaseTest {
 
 
     @Test
-    void shouldSuccessfullyPassedTenValuesEveryTableQuestion() {
+    void shouldSuccessfullyPassedTenValuesEveryTableQuestionTest() {
         val validationPage = new ValidationPage();
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.openLink(getAuthInfo);
@@ -78,7 +78,7 @@ public class QuestionnairePageTest extends BaseTest {
     }
 
     @Test
-    void shouldAddOneValueEachTableQuestionAndSubmitForm() {
+    void shouldAddOneValueEachTableQuestionAndSubmitFormTest() {
         val validationPage = new ValidationPage();
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.openLink(getAuthInfo);
@@ -95,7 +95,7 @@ public class QuestionnairePageTest extends BaseTest {
     }
 
     @Test
-    void shouldAddOneValueEachTableQuestionAndDelete() {
+    void shouldAddOneValueEachTableQuestionAndDeleteTest() {
         val validationPage = new ValidationPage();
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.openLink(getAuthInfo);
@@ -110,7 +110,7 @@ public class QuestionnairePageTest extends BaseTest {
     }
 
     @Test
-    void shouldFillOneRowAndEdit() {
+    void shouldFillOneRowAndEditTest() {
         val validationPage = new ValidationPage();
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.openLink(getAuthInfo);
@@ -125,7 +125,7 @@ public class QuestionnairePageTest extends BaseTest {
     }
 
     @Test
-    void shouldAddAllExtensions() {
+    void shouldAddAllExtensionsTest() {
         val validationPage = new ValidationPage();
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.openLink(getAuthInfo);
@@ -134,7 +134,7 @@ public class QuestionnairePageTest extends BaseTest {
     }
 
     @Test
-    void shouldDeclinedByDeadLink() {
+    void shouldDeclinedByDeadLinkTest() {
         val validationPage = new ValidationPage();
         val getAuthInfo = DataHelper.getFullNameInfo();
         validationPage.openLink(getAuthInfo);

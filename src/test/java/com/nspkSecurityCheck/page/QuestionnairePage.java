@@ -10,7 +10,8 @@ import org.openqa.selenium.By;
 import java.io.File;
 import java.util.Random;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.elements;
 import static com.nspkSecurityCheck.data.DataHelper.*;
 
 public class QuestionnairePage {
@@ -57,7 +58,7 @@ public class QuestionnairePage {
     private static final SelenideElement successful = $x("//div[text()='Данные успешно отправлены']");
     private static final SelenideElement checkboxClick =
             $x("//span[contains(@class,'ant-checkbox-checked')]");
-    private static final SelenideElement declinedLinkIsDeath =
+    private static final SelenideElement linkIsDeath =
             $x("//span[text()='Данная ссылка некорректна или неактуальна']");
     private final String alphabet = "АаБбВвГгДдЕеЁёЖжЗзИиКкЛлМмНн ОоПпРрСсТУуФфЦцЮюЯяЭэХх   ";
 
@@ -101,7 +102,7 @@ public class QuestionnairePage {
         element.shouldHave(Condition.value(value));
     }
 
-    @Step("Генерирует 2000 символов для каждого текстового поля и проверяет количество символов")
+    @Step("Генерирует 2к символов для каждого текстового поля и проверяет, что количество символов не меньше 2к")
     public void fillGeneratedValues2000charAndCheckNumOfChar() {
         fillFieldAndCheckNumberOfChars(changeFullName);
         fillFieldAndCheckNumberOfChars(birthData);
@@ -262,7 +263,7 @@ public class QuestionnairePage {
     public void submitClickByDeadLink() {
         checkboxClick.shouldBe(Condition.visible);
         submit.click();
-        declinedLinkIsDeath.shouldBe(Condition.visible);
+        linkIsDeath.shouldBe(Condition.visible);
     }
 
 
