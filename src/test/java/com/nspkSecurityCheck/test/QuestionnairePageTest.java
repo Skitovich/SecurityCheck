@@ -55,31 +55,7 @@ public class QuestionnairePageTest extends BaseTest {
         mailPage.checkAttachments(attachJpg);
     }
 
-    /*
-    При отправке электронного письма темой письма является: «Анкета – ФИО_Кандидата», где ФИО_Кандидата –
-    фамилия, имя, отчество кандидата из анкеты.
-     */
 
-    @Test
-    void shouldEnterToMailByHeaderTest() {
-        val validationPage = new ValidationPage();
-        val getAuthInfo = DataHelper.getFullNameInfo();
-        validationPage.openLink(getAuthInfo);
-        val questionnairePage = new QuestionnairePage();
-        val mailPage = new MailPage();
-        questionnairePage.fillGeneratedValues();
-        questionnairePage.fillQuestion13(minusYearsFromNow, dateFormatMonthYear);
-        questionnairePage.fillQuestion14(minusYearsFromNow, dateFormatYear);
-        questionnairePage.fillQuestion17(minusYearsFromNow, dateFormatMonthYear);
-        questionnairePage.radioButtonRelativesInOurOrganization();
-        questionnairePage.radioButtonRelativesPermanentlyAbroad();
-        questionnairePage.uploadFile(attachJpg);
-        questionnairePage.checkboxClick();
-        questionnairePage.submitClick();
-        mailPage.goToYandexMail();
-        mailPage.checkLoginMailAndCheckAttach(attachJpg);
-        mailPage.checkAttachments(attachJpg);
-    }
 
     // Проверить, что максимальная длина каждого поля = 2000 символов
     @Test
@@ -95,6 +71,8 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.checkboxClick();
         questionnairePage.submitClick();
     }
+
+
 
 
     /* Проверить, что можно успешно создать более, чем 10 строк
@@ -224,5 +202,31 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.checkboxClick();
         sleep(linkLifetime);
         questionnairePage.submitClickByDeadLink();
+    }
+
+         /*
+    При отправке электронного письма темой письма является: «Анкета – ФИО_Кандидата», где ФИО_Кандидата –
+    фамилия, имя, отчество кандидата из анкеты.
+     */
+
+    @Test
+    void shouldEnterToMailByHeaderTest() {
+        val validationPage = new ValidationPage();
+        val getAuthInfo = DataHelper.getFullNameInfo();
+        validationPage.openLink(getAuthInfo);
+        val questionnairePage = new QuestionnairePage();
+        val mailPage = new MailPage();
+        questionnairePage.fillGeneratedValues();
+        questionnairePage.fillQuestion13(minusYearsFromNow, dateFormatMonthYear);
+        questionnairePage.fillQuestion14(minusYearsFromNow, dateFormatYear);
+        questionnairePage.fillQuestion17(minusYearsFromNow, dateFormatMonthYear);
+        questionnairePage.radioButtonRelativesInOurOrganization();
+        questionnairePage.radioButtonRelativesPermanentlyAbroad();
+        questionnairePage.uploadFile(attachJpg);
+        questionnairePage.checkboxClick();
+        questionnairePage.submitClick();
+        mailPage.goToYandexMail();
+        mailPage.checkLoginMailAndCheckAttach(attachJpg);
+        mailPage.checkAttachments(attachJpg);
     }
 }

@@ -230,31 +230,36 @@ public class QuestionnairePage {
 
     @Step("Заполнение 13 вопроса {maxRows} раз")
     public void fill13QuestionManyTimes(int minusYearsFromNow, String dateFormat) {
+        int collectionSize = paginationButtonCollection.size();
         int maxRows = 11;
         while (maxRows >= 0) {
             fillQuestion13(minusYearsFromNow + maxRows, dateFormat);
             maxRows--;
         }
+        paginationButtonCollection.shouldHave(CollectionCondition.size(collectionSize + 2));
     }
 
     @Step("Заполнение 14 вопроса {maxRows} раз")
     public void fill14QuestionManyTimes(int minusYearsFromNow, String dateFormat) {
+        int collectionSize = paginationButtonCollection.size();
         int maxRows = 10;
         while (maxRows >= 0) {
             fillQuestion14(minusYearsFromNow + maxRows, dateFormat);
             maxRows--;
         }
+        paginationButtonCollection.shouldHave(CollectionCondition.size(collectionSize + 2));
     }
 
     @Step("Заполнение 17 вопроса {maxRows} раз, проверка что пагинация добавилась " +
             "для всех таблиц(размер коллекции кнопок пагинации 6 шт.)")
     public void fill17QuestionManyTimes(int minusYearsFromNow, String dateFormat) {
+        int collectionSize = paginationButtonCollection.size();
         int maxRows = 10;
         while (maxRows >= 0) {
             fillQuestion17(minusYearsFromNow + maxRows, dateFormat);
             maxRows--;
         }
-        paginationButtonCollection.shouldHave(CollectionCondition.size(6));
+        paginationButtonCollection.shouldHave(CollectionCondition.size(collectionSize + 2));
     }
 
     @Step("Отправить анкету на почту, проверка об успешности и проверка что нажат чекбокс")

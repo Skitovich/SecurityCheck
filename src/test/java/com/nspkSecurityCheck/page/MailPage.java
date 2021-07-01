@@ -35,7 +35,7 @@ public class MailPage {
 
     @Step("Нажать кнопку обновить")
     private void refreshInbox() {
-        sleep(15000);
+        sleep(25000);
         refresh.shouldBe(Condition.visible).click();
     }
 
