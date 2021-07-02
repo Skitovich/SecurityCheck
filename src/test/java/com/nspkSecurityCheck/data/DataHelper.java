@@ -22,10 +22,12 @@ public class DataHelper {
     private static String generateCandidateLastName() {
         return new Faker(new Locale("ru_RU")).name().lastName();
     }
+
     @Step("Генерирует имя")
     private static String generateCandidateFirstName() {
         return new Faker(new Locale("ru_RU")).name().firstName();
     }
+
     @Step("Генерирует отчество")
     public static String generateCandidatePatronymic() {
         ArrayList<String> patronymic = new ArrayList<>(Arrays.
@@ -33,6 +35,7 @@ public class DataHelper {
         Collections.shuffle(patronymic);
         return patronymic.get(1);
     }
+
     @Step("Генерирует текст")
     public static String generateText(int length, String alphabet) {
         SecureRandom rnd = new SecureRandom();
@@ -46,16 +49,18 @@ public class DataHelper {
         return sb.toString();
     }
 
-//    -------------------------------- Методы для анкеты*/----------------------------------------------
+    //    -------------------------------- Методы для анкеты*/----------------------------------------------
     @Step("Генерирует ФИО")
     public static String generateChangeFullName() {
         return new Faker(new Locale("ru")).name().nameWithMiddle();
     }
+
     @Step("Генерирует дату рождения и ФИО")
     public static String generateDateBirthData() {
         return new Faker(new Locale("ru")).name().nameWithMiddle() + " " +
                 new Faker(new Locale("ru")).address().city();
     }
+
     @Step("Генерирует паспортные данные, город и дату")
     public static String generatePassportData() {
         Faker faker = new Faker(new Locale("ru"));
@@ -65,31 +70,37 @@ public class DataHelper {
         Date date = faker.date().birthday(20, 30);
         return "Серия: " + startPassportCode + " №" + endPassportCode + " Выдан ОВД г." + city + " дата выдачи:" + date;
     }
+
     @Step("Генерирует налоговый ID")
     public static String generateTaxPayerNumber() {
         return new Faker(new Locale("ru")).code().imei().substring(0, 11);
     }
+
     @Step("Генерирует почтовый ящик")
     public static String generateContacts() {
         return new Faker().internet().emailAddress();
     }
+
     @Step("Генерирует Да или Нет")
     public static String generateAnswer() {
         ArrayList<String> answer = new ArrayList<>(Arrays.asList("Да", "Нет"));
         Collections.shuffle(answer);
         return answer.get(0);
     }
+
     @Step("Генерирует учебное заведение")
     public static String generateEducation() {
         return new Faker(new Locale("ru")).educator().university();
     }
+
     @Step("Генерирует дату")
     public static String generateDate(int minusYearsFromNow, String dateFormat) {
         LocalDate dayDeliveryCard = LocalDate.now().minusYears(minusYearsFromNow);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
         return dayDeliveryCard.format(formatter);
     }
-//------------------------------------------Поля и конструкторы-------------------------------------------
+
+    //------------------------------------------Поля и конструкторы-------------------------------------------
     public static class FullName {
         private static String firstname;
         private static String lastname;

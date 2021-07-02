@@ -65,11 +65,9 @@ public class QuestionnairePage {
             $x("//span[text()='Данная ссылка некорректна или неактуальна']");
     private final String alphabet = "АаБбВвГгДдЕеЁёЖжЗзИиКкЛлМмНн ОоПпРрСсТУуФфЦцЮюЯяЭэХх   ";
 
-
     public QuestionnairePage() {
         questionnairePage.shouldBe(Condition.visible);
     }
-
 
     @Step("Генерация значений для всех текстовых полей")
     public void fillGeneratedValues() {
@@ -121,9 +119,7 @@ public class QuestionnairePage {
         fillFieldAndCheckNumberOfChars(militaryStatus);
         fillFieldAndCheckNumberOfChars(financialLiabilities);
         fillFieldAndCheckNumberOfChars(hobbies);
-
     }
-
 
     @Step("метод принимает на вход номер вопроса 13,14,17 и нажимает на кнопку Добавить запись")
     private void getButtonAddValue(String numberOfQuestion) {
@@ -179,7 +175,6 @@ public class QuestionnairePage {
         end.val(generateDate(minusYearsFromNow, dateFormat)).pressEnter();
     }
 
-
     @Step("Заполнение 13 вопроса")
     public void fillQuestion13(int minusYearsFromNow, String dateFormat) {
         getButtonAddValue("13");
@@ -226,7 +221,6 @@ public class QuestionnairePage {
         else
             fillQuestion17(3, "MM.yyyy");
     }
-
 
     @Step("Заполнение 13 вопроса {maxRows} раз")
     public void fill13QuestionManyTimes(int minusYearsFromNow, String dateFormat) {
@@ -275,7 +269,6 @@ public class QuestionnairePage {
         submit.click();
         linkIsDeath.shouldBe(Condition.visible);
     }
-
 
     @Step("Удаляет случайную строку из таблицы и проверяет количество строк")
     public void randomRowDelete() {

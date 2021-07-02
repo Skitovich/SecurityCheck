@@ -55,8 +55,6 @@ public class QuestionnairePageTest extends BaseTest {
         mailPage.checkAttachments(attachJpg);
     }
 
-
-
     // Проверить, что максимальная длина каждого поля = 2000 символов
     @Test
     void shouldSuccessfullyPassedValueEveryTextField2000charTest() {
@@ -71,9 +69,6 @@ public class QuestionnairePageTest extends BaseTest {
         questionnairePage.checkboxClick();
         questionnairePage.submitClick();
     }
-
-
-
 
     /* Проверить, что можно успешно создать более, чем 10 строк
      и при этом корректно работает пагинация по 10 строк в таблицах

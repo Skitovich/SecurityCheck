@@ -39,7 +39,6 @@ public class ValidationPageTest extends BaseTest {
     void shouldGenerateLinkWih2000charsTest() {
         val validationPage = new ValidationPage();
         validationPage.fillForm2000chars();
-
     }
 
     /* Проверить, что при попытке пользователем открыть просроченную ссылку,
